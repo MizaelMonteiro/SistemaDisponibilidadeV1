@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+
+</head>
+
+    <body>
+        <form (ngSubmit)="criarUsuario()">
+
+            <input type="text" placeholder="Nome" [(ngModel)]="nome" name="nome">
+
+            <input type="email" placeholder="Email" [(ngModel)]="email" name="email">
+
+            <input type="password" placeholder="Senha" [(ngModel)]="senha" name="senha">
+
+            <button type="submit">
+                Cadastrar
+            </button>
+
+        </form>
+    </body>
+
+</html>
