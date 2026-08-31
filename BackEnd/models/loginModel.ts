@@ -36,6 +36,7 @@ export class LoginModel{
 
                     resolve(resposta);
                     console.log('Login deu certo')
+                    
                 }
             );
         });

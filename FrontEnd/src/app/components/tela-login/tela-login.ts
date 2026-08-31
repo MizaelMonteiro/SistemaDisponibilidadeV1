@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsuariosService } from '../../services/usuarios-service';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [FormsModule],
@@ -14,6 +15,7 @@ export class TelaLogin {
 
     email = '';
     senha = '';
+    readonly #router = inject(Router);
 
     logarUsuario() {
 
@@ -26,6 +28,7 @@ export class TelaLogin {
             .subscribe({
                 next: resposta => {
                     console.log("Usuário logado!", resposta);
+                    this.#router.navigate(['/listar']);
                 },
                 error: erro => {
                     console.log("Erro:", erro);
