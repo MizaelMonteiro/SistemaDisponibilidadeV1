@@ -1,46 +1,24 @@
-import conexao from "../infraestrutura/conexao.ts"
+import conexao from "../infraestrutura/conexao.ts";
 
-import type {  UsuarioLogin } from "./usuario.ts";
+class LoginModel {
 
+    buscarPorEmail(email: string) {
 
-export class LoginModel{
-    
-
-    logar(usuarioLogar: UsuarioLogin) {
-        const sql = `
-            SELECT *
-            FROM usuarios
-            WHERE email = ?
-            AND senha = ?
-        `;
+        const sql = "SELECT * FROM usuarios WHERE email = ?";
 
         return new Promise((resolve, reject) => {
 
-            conexao.query(
-                sql,
-                [usuarioLogar.email, usuarioLogar.senha],
-                (error, resposta) => {
+            conexao.query(sql, [email], (error, resposta) => {
 
-                    if (error) {
-                        reject(error);
-                        return;
-                    }
-
-                    const usuarios = Array.isArray(resposta) ? resposta : [];
-
-                    if (usuarios.length === 0) {
-                        reject(new Error("Usuário ou senha incorretos"));
-                        console.log("Usuário ou senha incorretos")
-                        return;
-                    }
-
-                    resolve(resposta);
-                    console.log('Login deu certo')
-                    
+                if (error) {
+                    reject(error);
+                    return;
                 }
-            );
+
+                resolve(resposta);
+            });
         });
     }
 }
 
-export default new LoginModel()
+export default new LoginModel();

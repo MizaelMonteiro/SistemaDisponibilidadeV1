@@ -18,6 +18,6 @@ export type UsuarioAtualizacao = {
 };
 
 export type UsuarioLogin = {
-    email?: string;
-    senha?: string;
+    email: string;
+    senha: string;
 };
