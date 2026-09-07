@@ -1,14 +1,16 @@
 import { Router } from "express";
 import usuariosController from "../controllers/usuariosController.ts";
+import { authToken } from "../middlewares/authToken.ts";
 
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/", authToken,(req, res) => {
     const listaUsuarios = usuariosController.buscar()
     listaUsuarios
         .then((usuarios) => res.status(200).json(usuarios))
         .catch((error) => res.status(400).json(error.message))
 });
+
 router.post("/", (req, res) => {
     const novoUsuario = req.body
     const usuario = usuariosController.criar(novoUsuario)
@@ -37,6 +39,9 @@ router.delete("/:id", (req, res) => {
         .catch((error)=> res.status(400).json(error.message))
 });
 
+router.get("/protegida", authToken,(req, res) =>{
+    res.json({message:"Acessando rota protegida"})
+})
 
 
 

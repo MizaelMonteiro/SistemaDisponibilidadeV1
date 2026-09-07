@@ -20,4 +20,10 @@ export class ExibirUsuarios {
         this.usuarios.set(res);
       })
   }
+
+  logout(){
+    this.#usuariosService.logout()
+    console.log("Você fez logout")
+    
+  }
 }

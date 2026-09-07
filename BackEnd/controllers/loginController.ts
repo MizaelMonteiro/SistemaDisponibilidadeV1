@@ -1,4 +1,7 @@
+import "dotenv/config";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 
 import type { UsuarioLogin } from "../models/usuario.ts";
 import loginModel from "../models/loginModel.ts";
@@ -29,11 +32,26 @@ export class LoginController {
             throw new Error("Usuário ou senha incorretos");
         }
 
+
+        const token = jwt.sign(
+            {
+                id: usuario.id,
+                email: usuario.email
+            },
+            process.env.JWTSECRET!,
+            {
+                expiresIn: "1h"
+            }
+        );
+
         console.log("login deu certo")
+
+
         return {
             id: usuario.id,
             nome: usuario.nome,
-            email: usuario.email
+            email: usuario.email,
+            token:token
         };
     }
 }

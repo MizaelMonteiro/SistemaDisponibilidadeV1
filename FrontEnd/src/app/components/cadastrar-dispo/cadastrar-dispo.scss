@@ -1,0 +1,343 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6f8;
+  color: #252525;
+}
+
+
+/* =========================
+   PÁGINA
+========================= */
+
+.pagina-disponibilidade {
+  width: 100%;
+  padding: 30px 40px;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.cabecalho {
+  margin-bottom: 25px;
+}
+
+.cabecalho h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.cabecalho p {
+  margin: 8px 0 0;
+  color: #6f6f6f;
+}
+
+
+/* =========================
+   LEGENDA
+========================= */
+
+.legenda {
+  display: flex;
+  gap: 25px;
+
+  margin-bottom: 15px;
+
+  font-size: 14px;
+}
+
+.legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legenda-disponivel,
+.legenda-indisponivel {
+  width: 18px;
+  height: 18px;
+
+  border-radius: 4px;
+
+  display: inline-block;
+}
+
+.legenda-disponivel {
+  background: #1f4d8f;
+}
+
+.legenda-indisponivel {
+  background: #ffffff;
+  border: 1px solid #cfd3d8;
+}
+
+
+/* =========================
+   TABELA
+========================= */
+
+.tabela-container {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+
+  overflow-x: auto;
+}
+
+.grade-horarios {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+}
+
+
+/* CABEÇALHO DA TABELA */
+
+.grade-horarios thead th {
+  height: 60px;
+
+  background: #f8f9fa;
+
+  border-bottom: 2px solid #dfe3e8;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  text-align: center;
+}
+
+.grade-horarios .coluna-horario {
+  width: 155px;
+}
+
+
+/* LINHAS */
+
+.grade-horarios tbody tr {
+  height: 58px;
+}
+
+.grade-horarios td {
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+
+  text-align: center;
+}
+
+.grade-horarios td:last-child {
+  border-right: none;
+}
+
+
+/* =========================
+   HORÁRIO
+========================= */
+
+.horario {
+  padding: 5px 10px;
+
+  background: #fafafa;
+}
+
+.horario strong {
+  display: block;
+
+  font-size: 12px;
+
+  color: #777;
+}
+
+.horario span {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   CÉLULA DE DISPONIBILIDADE
+========================= */
+
+.celula {
+  width: 100%;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.celula input {
+  display: none;
+}
+
+
+/* Marcador */
+
+.marcador {
+  width: 26px;
+  height: 26px;
+
+  border: 2px solid #cfd3d8;
+
+  border-radius: 6px;
+
+  transition: 0.15s;
+}
+
+
+/* Hover */
+
+.celula:hover {
+  background: #f5f7fa;
+}
+
+.celula:hover .marcador {
+  border-color: #1f4d8f;
+}
+
+
+/* Marcado */
+
+.celula input:checked + .marcador {
+  background: #1f4d8f;
+
+  border-color: #1f4d8f;
+
+  position: relative;
+}
+
+
+/* Check */
+
+.celula input:checked + .marcador::after {
+  content: "✓";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+/* =========================
+   INTERVALOS
+========================= */
+
+.intervalo td {
+  height: 30px;
+
+  background: #f1f2f4;
+
+  color: #777;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.acoes {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.acoes button {
+  padding: 11px 20px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.botao-secundario {
+  background: white;
+
+  border: 1px solid #cfd3d8;
+
+  color: #555;
+}
+
+.botao-secundario:hover {
+  background: #f1f2f4;
+}
+
+.botao-principal {
+  background: #1f4d8f;
+
+  border: 1px solid #1f4d8f;
+
+  color: white;
+}
+
+.botao-principal:hover {
+  opacity: 0.9;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 800px) {
+
+  .pagina-disponibilidade {
+    padding: 20px;
+  }
+
+  .tabela-container {
+    overflow-x: auto;
+  }
+
+  .grade-horarios {
+    min-width: 750px;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+
+  .acoes button {
+    width: 100%;
+  }
+
+}

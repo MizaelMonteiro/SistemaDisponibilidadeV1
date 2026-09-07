@@ -1,0 +1,354 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6f8;
+  color: #252525;
+}
+
+.pagina {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+/* MENU */
+
+.menu {
+  width: 240px;
+  background: #ffffff;
+  border-right: 1px solid #e2e2e2;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  padding: 25px 20px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.logo h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.logo span {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #777;
+}
+
+.menu nav {
+  padding: 15px 10px;
+}
+
+.menu-final {
+  margin-top: auto;
+  padding: 10px;
+  border-top: 1px solid #e2e2e2;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  padding: 12px;
+
+  margin-bottom: 5px;
+
+  border-radius: 6px;
+
+  text-decoration: none;
+  color: #555;
+
+  font-size: 14px;
+}
+
+.menu-item span {
+  width: 20px;
+  text-align: center;
+}
+
+.menu-item:hover {
+  background: #f1f2f4;
+}
+
+.menu-item.ativo {
+  background: #e9edf5;
+  color: #1f4d8f;
+  font-weight: bold;
+}
+
+.sair {
+  width: 100%;
+  padding: 12px;
+
+  border: 0;
+  background: transparent;
+
+  text-align: left;
+
+  color: #b33a3a;
+  cursor: pointer;
+}
+
+.sair span {
+  margin-right: 12px;
+}
+
+
+/* CONTEÚDO */
+
+.conteudo {
+  flex: 1;
+  padding: 30px 40px;
+}
+
+
+/* CABEÇALHO */
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 35px;
+}
+
+.cabecalho h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.cabecalho p {
+  margin-top: 8px;
+  color: #777;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.usuario small {
+  display: block;
+  color: #777;
+  margin-top: 3px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #e9edf5;
+  color: #1f4d8f;
+  font-weight: bold;
+}
+
+
+/* CARD DE STATUS */
+
+.status {
+  margin-bottom: 35px;
+}
+
+.status-card {
+  display: flex;
+  gap: 25px;
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+}
+
+.status-icone {
+  width: 60px;
+  height: 60px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #eef1f6;
+
+  font-size: 28px;
+}
+
+.status-conteudo {
+  flex: 1;
+}
+
+.status-conteudo .titulo {
+  display: block;
+
+  color: #666;
+  font-size: 14px;
+}
+
+.status-conteudo strong {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 22px;
+}
+
+.status-conteudo p {
+  color: #666;
+  line-height: 1.5;
+}
+
+.status-conteudo button {
+  padding: 10px 16px;
+
+  border: none;
+  border-radius: 5px;
+
+  background: #1f4d8f;
+  color: white;
+
+  cursor: pointer;
+}
+
+.status-conteudo button:hover {
+  opacity: 0.9;
+}
+
+
+/* SEÇÃO */
+
+.secao {
+  margin-top: 20px;
+}
+
+.titulo-secao {
+  margin-bottom: 20px;
+}
+
+.titulo-secao h2 {
+  margin: 0;
+}
+
+.titulo-secao p {
+  color: #777;
+  line-height: 1.5;
+}
+
+
+/* INFORMAÇÕES */
+
+.informacoes {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.informacao {
+  display: flex;
+
+  gap: 15px;
+
+  padding: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+}
+
+.informacao-icone {
+  width: 35px;
+  height: 35px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eef1f6;
+  color: #1f4d8f;
+
+  font-weight: bold;
+}
+
+.informacao h3 {
+  margin: 0 0 8px;
+
+  font-size: 16px;
+}
+
+.informacao p {
+  margin: 0;
+
+  color: #666;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+
+  .informacoes {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .menu {
+    width: 70px;
+  }
+
+  .logo h2,
+  .logo span {
+    display: none;
+  }
+
+  .menu-item {
+    justify-content: center;
+  }
+
+  .menu-item:not(.ativo) {
+    font-size: 0;
+  }
+
+  .conteudo {
+    padding: 20px;
+  }
+
+  .cabecalho {
+    align-items: flex-start;
+  }
+
+}

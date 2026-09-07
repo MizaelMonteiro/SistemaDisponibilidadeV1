@@ -24,11 +24,13 @@ export class TelaLogin {
             senha: this.senha
         };
 
-        this.#usuariosService.login(usuarioLogar)
+        this.#usuariosService.logar(usuarioLogar)
             .subscribe({
                 next: resposta => {
                     console.log("Usuário logado!", resposta);
-                    this.#router.navigate(['/listar']);
+                
+                    localStorage.setItem("token", resposta.token);
+                    this.#router.navigate(['/home']);
                 },
                 error: erro => {
                     console.log("Erro:", erro);

@@ -1,0 +1,230 @@
+<div class="pagina">
+
+  <!-- Menu lateral -->
+  <aside class="menu">
+
+    <div class="logo">
+      <h2>Disponibilidade</h2>
+      <span>Sistema de Horários</span>
+    </div>
+
+    <nav>
+
+      <a href="#" class="menu-item ativo">
+        <span>⌂</span>
+        Início
+      </a>
+
+      <a href="#" class="menu-item">
+        <span>◷</span>
+        Minha disponibilidade
+      </a>
+
+    </nav>
+
+    <div class="menu-final">
+
+      @if (estaLogado) {
+
+      <a routerLink="/perfil" class="menu-item">
+        <span>◉</span>
+        Meu perfil
+      </a>
+
+      <button class="sair" (click)="logout()">
+        <span>⇥</span>
+        Sair
+      </button>
+
+      } @else {
+
+      <a href="/login" class="menu-item">
+        <span>⇥</span>
+        Entrar
+      </a>
+
+      <a href="/criar" class="menu-item">
+        <span>+</span>
+        Criar conta
+      </a>
+
+      }
+
+    </div>
+
+  </aside>
+
+
+  <!-- Conteúdo principal -->
+  <main class="conteudo">
+
+    <!-- Cabeçalho -->
+    <header class="cabecalho">
+
+      <div>
+        <h1>Início</h1>
+
+        <p>
+          Consulte e informe sua disponibilidade de horários.
+        </p>
+      </div>
+      @if(estaLogado){
+
+      
+      <div class="usuario">
+
+        <div class="avatar">
+          P
+        </div>
+
+        <div> 
+          <strong>Professor</strong>
+          <small>Usuário</small>
+        </div>
+
+      </div>
+    }@else {
+      <div class="usuario">
+
+        <div class="avatar">
+          A
+        </div>
+
+        <div> 
+          <strong>Anônimo</strong>
+          <small>Login não efetuado</small>
+        </div>
+
+      </div>
+    }
+    </header>
+
+
+    <!-- Status da disponibilidade -->
+    <section class="status">
+
+      <div class="card status-card">
+
+        <div class="status-icone">
+          ◷
+        </div>
+
+        <div class="status-conteudo">
+
+          <span class="titulo">
+            Minha disponibilidade
+          </span>
+
+          <strong>
+            Ainda não cadastrada
+          </strong>
+
+          <p>
+            Informe os dias e horários em que você
+            estará disponível para ministrar aulas.
+          </p>
+          @if(estaLogado){
+            
+            <button onclick="window.location.href='/cadastrarDispo'">
+              Cadastrar disponibilidade
+            </button>
+          }@else {
+            
+            <button onclick="window.location.href='/login'">
+              Cadastrar disponibilidade
+            </button>
+          }
+          
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Informações -->
+    <section class="secao">
+
+      <div class="titulo-secao">
+
+        <h2>
+          Como funciona?
+        </h2>
+
+        <p>
+          Sua disponibilidade será utilizada posteriormente
+          para auxiliar na organização dos horários das turmas.
+        </p>
+
+      </div>
+
+
+      <div class="informacoes">
+
+        <div class="card informacao">
+
+          <div class="informacao-icone">
+            1
+          </div>
+
+          <div>
+            <h3>
+              Informe seus horários
+            </h3>
+
+            <p>
+              Selecione os dias da semana e os períodos
+              em que você possui disponibilidade.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="card informacao">
+
+          <div class="informacao-icone">
+            2
+          </div>
+
+          <div>
+            <h3>
+              Mantenha seus horários atualizados
+            </h3>
+
+            <p>
+              Você poderá consultar, alterar ou remover
+              os períodos cadastrados.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="card informacao">
+
+          <div class="informacao-icone">
+            3
+          </div>
+
+          <div>
+            <h3>
+              Organização dos horários
+            </h3>
+
+            <p>
+              As informações poderão ser utilizadas
+              posteriormente na montagem dos horários.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
