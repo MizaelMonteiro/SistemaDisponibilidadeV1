@@ -34,9 +34,8 @@ export function authToken(
         }
 
         const usuario = jwt.verify(token, segredo);
-
         req.usuario = usuario;
-
+        
         next();
 
     } catch (error) {

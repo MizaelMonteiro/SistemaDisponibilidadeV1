@@ -16,12 +16,13 @@
       Sair
     </button>
   </div>
-  
+
   <div class="usuarios">
-    @for (usu of usuarios(); track usu.id) {
+    @for (usu of usuarios(); track usu.idUsuario) {
     <div class="card-usuario">
 
-      <p class="nome">{{ usu.nome }}</p>
+      <p class="nome">{{ usu.nome}}</p>
+      
 
       <p class="email">
         {{ usu.email }}

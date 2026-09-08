@@ -6,7 +6,7 @@ import usuariorouter from "./Routers/usuarioRoutes.ts";
 import loginrouter from "./Routers/loginRoutes.ts";
 
 import conexao from "./infraestrutura/conexao.ts";
-import tabelas from "./infraestrutura/tabelas.ts";
+
 
 import cors from 'cors';
 
@@ -20,7 +20,7 @@ app.use(cors({ origin: 'http://localhost:4200' }));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
-tabelas.init(conexao)
+
 
 
 

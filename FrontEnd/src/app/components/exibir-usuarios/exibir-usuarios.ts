@@ -17,8 +17,12 @@ export class ExibirUsuarios {
     this.#usuariosService.obterTodos().subscribe(
       res => {
         console.log(res);
+        
         this.usuarios.set(res);
-      })
+        
+      });
+      
+      
   }
 
   logout(){
