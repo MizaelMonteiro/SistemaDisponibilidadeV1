@@ -42,7 +42,7 @@ export class UsuariosModel {
             conexao.query(sql, novoUsuario, (error, resposta) => {
 
                 if (error) {
-                    console.log("Deu erro no insert");
+                    console.log("Deu erro no insert: ", error);
                     reject(error);
                     return;
                 }
