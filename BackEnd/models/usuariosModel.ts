@@ -1,4 +1,5 @@
 import conexao from "../infraestrutura/conexao.ts";
+
 import type {
     UsuarioCriacao,
     UsuarioAtualizacao

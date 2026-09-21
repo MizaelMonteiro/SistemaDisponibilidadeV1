@@ -29,7 +29,7 @@ export class ProfessorModel {
                 }
             );
         });
-    }
+        }
 
     relacionarUsuarioProf(idUsuario: number) {
 

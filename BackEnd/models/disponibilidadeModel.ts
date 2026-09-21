@@ -1,6 +1,7 @@
 import conexao from "../infraestrutura/conexao.ts";
 
-export class horaioModel{
+export class DisponibilidadeModel{
+    
 
     consultarDisponibilidadeProfessor() {
 
