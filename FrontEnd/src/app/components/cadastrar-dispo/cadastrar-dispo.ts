@@ -3,153 +3,131 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 
 import { Horario } from '../../services/horario';
 import { HorariosService } from '../../services/horario-service';
+import { DisponibilidadeService } from '../../services/disponibilidade-service';
 
 interface LinhaHorario {
-    hora: string;
-    segunda: Horario;
-    terca: Horario;
-    quarta: Horario;
-    quinta: Horario;
-    sexta: Horario;
+  hora: string;
+  segunda: Horario;
+  terca: Horario;
+  quarta: Horario;
+  quinta: Horario;
+  sexta: Horario;
 }
 
 @Component({
-    imports: [CommonModule],
-    selector: 'app-cadastrar-dispo',
-    styleUrl: './cadastrar-dispo.scss',
-    templateUrl: './cadastrar-dispo.html',
+  imports: [CommonModule],
+  selector: 'app-cadastrar-dispo',
+  styleUrl: './cadastrar-dispo.scss',
+  templateUrl: './cadastrar-dispo.html',
 })
 export class CadastrarDispo implements OnInit {
+  readonly #horariosService = inject(HorariosService);
 
-    readonly #horariosService = inject(HorariosService);
+  readonly #disponibilidadeService = inject(DisponibilidadeService);
 
-    protected horarios = signal<Horario[]>([]);
+  protected horarios = signal<Horario[]>([]);
 
-    protected linhas = signal<LinhaHorario[]>([]);
+  protected linhas = signal<LinhaHorario[]>([]);
 
-    protected horariosSelecionados = signal<number[]>([]);
+  protected horariosSelecionados = signal<number[]>([]);
 
+  ngOnInit(): void {
+    
 
-    ngOnInit(): void {
+    this.#horariosService.obterTodos().subscribe({
+      next: (horarios) => {
+        //console.log('Horários recebidos:', horarios);
 
-        this.#horariosService.obterTodos()
-            .subscribe({
+        this.horarios.set(horarios);
+        this.montarGrade();
 
-                next: (horarios) => {
+        this.buscarDisponibilidade();
+      },
 
-                    console.log('Horários recebidos:', horarios);
+      error: (erro) => {
+        console.error('Erro ao buscar horários:', erro);
+      },
+    });
+  }
 
-                    this.horarios.set(horarios);
+  private montarGrade(): void {
+    const horarios = this.horarios();
 
-                    this.montarGrade();
+    const novasLinhas: LinhaHorario[] = [];
 
-                },
+    for (let i = 0; i < 17; i++) {
+      novasLinhas.push({
+        hora: horarios[i].HoraInicio,
 
-                error: (erro) => {
+        segunda: horarios[i],
 
-                    console.error(
-                        'Erro ao buscar horários:',
-                        erro
-                    );
+        terca: horarios[i + 17],
 
-                }
+        quarta: horarios[i + 34],
 
-            });
+        quinta: horarios[i + 51],
+
+        sexta: horarios[i + 68],
+      });
     }
 
+    this.linhas.set(novasLinhas);
 
-    private montarGrade(): void {
+    //console.log('Grade montada:', this.linhas());
+  }
 
-        const horarios = this.horarios();
+  protected alternarHorario(idHorario: number, evento: Event): void {
+    const checkbox = evento.target as HTMLInputElement;
 
-        const novasLinhas: LinhaHorario[] = [];
+    const selecionados = this.horariosSelecionados();
 
-        for (let i = 0; i < 17; i++) {
-
-            novasLinhas.push({
-
-                hora: horarios[i].HoraInicio,
-
-                segunda: horarios[i],
-
-                terca: horarios[i + 17],
-
-                quarta: horarios[i + 34],
-
-                quinta: horarios[i + 51],
-
-                sexta: horarios[i + 68]
-
-            });
-        }
-
-        this.linhas.set(novasLinhas);
-
-        console.log(
-            'Grade montada:',
-            this.linhas()
-        );
+    if (checkbox.checked) {
+      this.horariosSelecionados.set([...selecionados, idHorario]);
+    } else {
+      this.horariosSelecionados.set(selecionados.filter((id) => id !== idHorario));
     }
 
+    console.log('Horários selecionados:', this.horariosSelecionados());
+  }
 
-    protected alternarHorario(
-        idHorario: number,
-        evento: Event
-    ): void {
+  protected estaSelecionado(idHorario: number): boolean {
+    return this.horariosSelecionados().includes(idHorario);
+  }
 
-        const checkbox =
-            evento.target as HTMLInputElement;
+  protected limparSelecao(): void {
+    this.horariosSelecionados.set([]);
 
-        const selecionados =
-            this.horariosSelecionados();
+    console.log('Seleção limpa');
+  }
 
+  private buscarDisponibilidade(): void {
+    this.#disponibilidadeService.buscarDisponibilidade().subscribe({
+      next: (disponibilidades) => {
+        console.log('Disponibilidades recebidas:', disponibilidades);
 
-        if (checkbox.checked) {
+        const horarios = disponibilidades.map((disponibilidade) => disponibilidade.IdHorario);
 
-            this.horariosSelecionados.set([
-                ...selecionados,
-                idHorario
-            ]);
+        this.horariosSelecionados.set(horarios);
+      },
 
-        } else {
+      error: (erro) => {
+        console.error('Erro ao buscar disponibilidade:', erro);
+      },
+    });
+  }
 
-            this.horariosSelecionados.set(
-                selecionados.filter(
-                    id => id !== idHorario
-                )
-            );
+  protected salvarDisponibilidade(): void {
+    const horarios = this.horariosSelecionados();
 
-        }
+    console.log('Horários que serão salvos:', horarios);
 
-        console.log(
-            'Horários selecionados:',
-            this.horariosSelecionados()
-        );
-    }
-
-
-    protected estaSelecionado(
-        idHorario: number
-    ): boolean {
-
-        return this.horariosSelecionados()
-            .includes(idHorario);
-    }
-
-
-    protected limparSelecao(): void {
-
-        this.horariosSelecionados.set([]);
-
-        console.log('Seleção limpa');
-    }
-
-
-    protected salvarDisponibilidade(): void {
-
-        console.log(
-            'Horários que serão salvos:',
-            this.horariosSelecionados()
-        );
-    }
+    this.#disponibilidadeService.salvarDisponibilidade(horarios).subscribe({
+      next: (resposta) => {
+        console.log('Disponibilidade salva:', resposta);
+      },
+      error: (erro) => {
+        console.error('Erro ao salvar disponibilidade:', erro);
+      },
+    });
+  }
 }

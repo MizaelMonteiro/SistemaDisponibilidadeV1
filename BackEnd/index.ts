@@ -5,6 +5,7 @@ import express, { urlencoded } from "express";
 import usuariorouter from "./Routers/usuarioRoutes.ts";
 import loginrouter from "./Routers/loginRoutes.ts";
 import horariorouter from "./Routers/horarioRoutes.ts";
+import disponibilidadeRouter from "./Routers/disponibilidadeRoutes.ts";
 
 import conexao from "./infraestrutura/conexao.ts";
 
@@ -28,6 +29,7 @@ app.use(express.urlencoded({extended:true}))
 app.use("/usuarios", usuariorouter);
 app.use("/login", loginrouter);
 app.use("/horarios", horariorouter);
+app.use("/disponibilidade", disponibilidadeRouter);
 
 
 app.listen(3000, () => {

@@ -1,5 +1,4 @@
-export interface Disponibilidade {
-    IdDisponibilidade: number;
+export interface DisponibilidadeCriacao {
     IdProfessor: number;
     IdHorario: number;
 }
