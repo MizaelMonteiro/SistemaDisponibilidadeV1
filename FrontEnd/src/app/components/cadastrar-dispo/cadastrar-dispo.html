@@ -1,213 +1,277 @@
-<div class="pagina-disponibilidade">
+<div class="pagina">
 
-    <header class="cabecalho">
+    <!-- MENU LATERAL -->
+    <aside class="menu">
 
-        <div>
-            <h1>Minha disponibilidade</h1>
-
-            <p>
-                Marque os horários em que você está disponível para ministrar aulas.
-            </p>
+        <div class="logo">
+            <h2>Disponibilidade</h2>
+            <span>Sistema de Horários</span>
         </div>
 
-    </header>
+        <nav>
 
+            <a href="/" class="menu-item">
+                <span>⌂</span>
+                Início
+            </a>
 
-    <div class="legenda">
+            <a href="/minha-disponibilidade" class="menu-item ativo">
+                <span>◷</span>
+                Minha disponibilidade
+            </a>
 
-        <div class="legenda-item">
-            <span class="legenda-disponivel"></span>
-            Disponível
+        </nav>
+
+        <div class="menu-final">
+
+            @if (estaLogado) {
+
+                <a routerLink="/perfil" class="menu-item">
+                    <span>◉</span>
+                    Meu perfil
+                </a>
+
+                <button class="sair" (click)="logout()">
+                    <span>⇥</span>
+                    Sair
+                </button>
+
+            } @else {
+
+                <a href="/login" class="menu-item">
+                    <span>⇥</span>
+                    Entrar
+                </a>
+
+                <a href="/criar" class="menu-item">
+                    <span>+</span>
+                    Criar conta
+                </a>
+
+            }
+
         </div>
 
-        <div class="legenda-item">
-            <span class="legenda-indisponivel"></span>
-            Não disponível
+    </aside>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo">
+
+        <div class="pagina-disponibilidade">
+
+            <header class="cabecalho">
+
+                <div>
+                    <h1>Minha disponibilidade</h1>
+
+                    <p>
+                        Marque os horários em que você está disponível
+                        para ministrar aulas.
+                    </p>
+                </div>
+
+            </header>
+
+
+            <div class="legenda">
+
+                <div class="legenda-item">
+                    <span class="legenda-disponivel"></span>
+                    Disponível
+                </div>
+
+                <div class="legenda-item">
+                    <span class="legenda-indisponivel"></span>
+                    Não disponível
+                </div>
+
+            </div>
+
+
+            <div class="tabela-container">
+
+                <table class="grade-horarios">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="coluna-horario">
+                                Horário
+                            </th>
+
+                            <th>
+                                Seg
+                            </th>
+
+                            <th>
+                                Ter
+                            </th>
+
+                            <th>
+                                Qua
+                            </th>
+
+                            <th>
+                                Qui
+                            </th>
+
+                            <th>
+                                Sex
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @for (linha of linhas(); track linha.segunda.IdHorario) {
+
+                            <tr>
+
+                                <td class="horario">
+
+                                    <strong>
+                                        {{ linha.segunda.IdHorario }}
+                                    </strong>
+
+                                    <span>
+                                        {{ linha.hora }}
+                                    </span>
+
+                                </td>
+
+
+                                <!-- SEGUNDA -->
+
+                                <td>
+
+                                    <label class="celula">
+
+                                        <input
+                                            type="checkbox"
+                                            [checked]="estaSelecionado(linha.segunda.IdHorario)"
+                                            (change)="alternarHorario(linha.segunda.IdHorario, $event)"
+                                        >
+
+                                        <span class="marcador"></span>
+
+                                    </label>
+
+                                </td>
+
+
+                                <!-- TERÇA -->
+
+                                <td>
+
+                                    <label class="celula">
+
+                                        <input
+                                            type="checkbox"
+                                            [checked]="estaSelecionado(linha.terca.IdHorario)"
+                                            (change)="alternarHorario(linha.terca.IdHorario, $event)"
+                                        >
+
+                                        <span class="marcador"></span>
+
+                                    </label>
+
+                                </td>
+
+
+                                <!-- QUARTA -->
+
+                                <td>
+
+                                    <label class="celula">
+
+                                        <input
+                                            type="checkbox"
+                                            [checked]="estaSelecionado(linha.quarta.IdHorario)"
+                                            (change)="alternarHorario(linha.quarta.IdHorario, $event)"
+                                        >
+
+                                        <span class="marcador"></span>
+
+                                    </label>
+
+                                </td>
+
+
+                                <!-- QUINTA -->
+
+                                <td>
+
+                                    <label class="celula">
+
+                                        <input
+                                            type="checkbox"
+                                            [checked]="estaSelecionado(linha.quinta.IdHorario)"
+                                            (change)="alternarHorario(linha.quinta.IdHorario, $event)"
+                                        >
+
+                                        <span class="marcador"></span>
+
+                                    </label>
+
+                                </td>
+
+
+                                <!-- SEXTA -->
+
+                                <td>
+
+                                    <label class="celula">
+
+                                        <input
+                                            type="checkbox"
+                                            [checked]="estaSelecionado(linha.sexta.IdHorario)"
+                                            (change)="alternarHorario(linha.sexta.IdHorario, $event)"
+                                        >
+
+                                        <span class="marcador"></span>
+
+                                    </label>
+
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div class="acoes">
+
+                <button
+                    class="botao-secundario"
+                    type="button"
+                    (click)="limparSelecao()"
+                >
+                    Limpar seleção
+                </button>
+
+                <button
+                    class="botao-principal"
+                    type="button"
+                    (click)="salvarDisponibilidade()"
+                >
+                    Salvar disponibilidade
+                </button>
+
+            </div>
+
         </div>
 
-    </div>
-
-
-    <div class="tabela-container">
-
-        <table class="grade-horarios">
-
-            <thead>
-
-                <tr>
-
-                    <th class="coluna-horario">
-                        Horário
-                    </th>
-
-                    <th>
-                        Seg
-                    </th>
-
-                    <th>
-                        Ter
-                    </th>
-
-                    <th>
-                        Qua
-                    </th>
-
-                    <th>
-                        Qui
-                    </th>
-
-                    <th>
-                        Sex
-                    </th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                @for (linha of linhas(); track linha.segunda.IdHorario) {
-
-                    <tr>
-
-                        <td class="horario">
-
-                            <strong>
-                                {{ linha.segunda.IdHorario }}
-                            </strong>
-
-                            <span>
-                                {{ linha.hora }}
-                            </span>
-
-                        </td>
-
-
-                        <!-- SEGUNDA -->
-
-                        <td>
-
-                            <label class="celula">
-
-                                <input
-                                    type="checkbox"
-                                    [checked]="estaSelecionado(linha.segunda.IdHorario)"
-                                    (change)="alternarHorario(linha.segunda.IdHorario, $event)"
-                                >
-
-                                <span class="marcador"></span>
-
-                            </label>
-
-                        </td>
-
-
-                        <!-- TERÇA -->
-
-                        <td>
-
-                            <label class="celula">
-
-                                <input
-                                    type="checkbox"
-                                    [checked]="estaSelecionado(linha.terca.IdHorario)"
-                                    (change)="alternarHorario(linha.terca.IdHorario, $event)"
-                                >
-
-                                <span class="marcador"></span>
-
-                            </label>
-
-                        </td>
-
-
-                        <!-- QUARTA -->
-
-                        <td>
-
-                            <label class="celula">
-
-                                <input
-                                    type="checkbox"
-                                    [checked]="estaSelecionado(linha.quarta.IdHorario)"
-                                    (change)="alternarHorario(linha.quarta.IdHorario, $event)"
-                                >
-
-                                <span class="marcador"></span>
-
-                            </label>
-
-                        </td>
-
-
-                        <!-- QUINTA -->
-
-                        <td>
-
-                            <label class="celula">
-
-                                <input
-                                    type="checkbox"
-                                    [checked]="estaSelecionado(linha.quinta.IdHorario)"
-                                    (change)="alternarHorario(linha.quinta.IdHorario, $event)"
-                                >
-
-                                <span class="marcador"></span>
-
-                            </label>
-
-                        </td>
-
-
-                        <!-- SEXTA -->
-
-                        <td>
-
-                            <label class="celula">
-
-                                <input
-                                    type="checkbox"
-                                    [checked]="estaSelecionado(linha.sexta.IdHorario)"
-                                    (change)="alternarHorario(linha.sexta.IdHorario, $event)"
-                                >
-
-                                <span class="marcador"></span>
-
-                            </label>
-
-                        </td>
-
-                    </tr>
-
-                }
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-
-    <div class="acoes">
-
-        <button
-            class="botao-secundario"
-            type="button"
-            (click)="limparSelecao()"
-        >
-            Limpar seleção
-        </button>
-
-
-        <button
-            class="botao-principal"
-            type="button"
-            (click)="salvarDisponibilidade()"
-        >
-            Salvar disponibilidade
-        </button>
-
-    </div>
+    </main>
 
 </div>

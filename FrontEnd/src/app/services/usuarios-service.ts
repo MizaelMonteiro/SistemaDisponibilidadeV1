@@ -16,6 +16,8 @@ export class UsuariosService {
     return this.#http.get<Usuario[]>(`${this.API}/usuarios`);
   }
 
+  
+
   criar(usuario: UsuarioCriacao) {
     return this.#http.post(
         `${this.API}/usuarios`,

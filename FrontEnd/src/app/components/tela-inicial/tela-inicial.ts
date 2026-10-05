@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios-service';
+import { ProfessorService } from '../../services/professor-service';
 
 @Component({
   imports: [],
@@ -9,6 +10,21 @@ import { UsuariosService } from '../../services/usuarios-service';
 })
 export class TelaInicial {
   readonly #usuariosService = inject(UsuariosService)
+  readonly #professorService = inject(ProfessorService);
+  protected nomeProfessor = signal('');
+  
+  ngOnInit(): void {
+
+    this.#professorService.buscarProfessor().subscribe({
+        next: (professor) => {
+            this.nomeProfessor.set(professor.Nome);
+        },
+        error: (erro) => {
+            console.error('Erro ao buscar professor:', erro);
+        }
+    });
+
+}
 
   get estaLogado() {
     return localStorage.getItem('token') !== null;

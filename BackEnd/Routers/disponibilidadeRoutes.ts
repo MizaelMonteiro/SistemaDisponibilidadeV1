@@ -22,6 +22,8 @@ router.get("/", authToken, (req, res) => {
         });
 });
 
+
+
 router.get("/:idProfessor",authToken, (req, res) => {
 
     const idProfessor = Number(req.params.idProfessor);

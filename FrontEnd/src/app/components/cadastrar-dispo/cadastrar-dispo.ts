@@ -4,6 +4,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { Horario } from '../../services/horario';
 import { HorariosService } from '../../services/horario-service';
 import { DisponibilidadeService } from '../../services/disponibilidade-service';
+import { UsuariosService } from '../../services/usuarios-service';
 
 interface LinhaHorario {
   hora: string;
@@ -21,6 +22,7 @@ interface LinhaHorario {
   templateUrl: './cadastrar-dispo.html',
 })
 export class CadastrarDispo implements OnInit {
+  readonly #usuariosService = inject(UsuariosService)
   readonly #horariosService = inject(HorariosService);
 
   readonly #disponibilidadeService = inject(DisponibilidadeService);
@@ -129,5 +131,14 @@ export class CadastrarDispo implements OnInit {
         console.error('Erro ao salvar disponibilidade:', erro);
       },
     });
+  }
+  
+  get estaLogado() {
+    return localStorage.getItem('token') !== null;
+  }
+  logout(){
+    console.log("Você fez logout eu acho")
+    this.#usuariosService.logout()
+    console.log("Você fez logout")
   }
 }

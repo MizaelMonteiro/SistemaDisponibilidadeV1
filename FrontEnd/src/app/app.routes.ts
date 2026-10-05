@@ -5,13 +5,15 @@ import { TelaLogin } from './components/tela-login/tela-login';
 import { TelaInicial } from './components/tela-inicial/tela-inicial';
 import { CadastrarDispo } from './components/cadastrar-dispo/cadastrar-dispo';
 import { authGuard } from './guards/auth-guard';
+import { MinhaDisponibilidade } from './components/minha-disponibilidade/minha-disponibilidade';
 
 
 export const routes: Routes = [
     {path: 'listar', component: ExibirUsuarios ,canActivate: [authGuard]},
-    {path: '', redirectTo: '/listar', pathMatch: 'full'},
+    {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'criar', component: CriarUsuario },
     {path: 'login', component: TelaLogin },
     {path: 'home', component: TelaInicial },
-    {path: 'cadastrarDispo', component: CadastrarDispo }
+    {path: 'cadastrarDispo', component: CadastrarDispo, canActivate: [authGuard] },
+    {path: 'minha-disponibilidade', component: MinhaDisponibilidade, canActivate: [authGuard] },
 ];

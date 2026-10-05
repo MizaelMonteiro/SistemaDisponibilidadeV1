@@ -1,22 +1,207 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f6f8;
-  color: #252525;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f6f8;
+    color: #252525;
 }
 
 
 /* =========================
-   PÁGINA
+   ESTRUTURA PRINCIPAL
+========================= */
+
+.pagina {
+    display: flex;
+
+    width: 100%;
+    height: 100vh;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    background: #f5f6f8;
+}
+
+
+/* =========================
+   MENU LATERAL
+========================= */
+
+.menu {
+    width: 240px;
+    min-width: 240px;
+
+    height: 100vh;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e2e2e2;
+
+    display: flex;
+    flex-direction: column;
+
+    flex-shrink: 0;
+}
+
+
+/* LOGO */
+
+.logo {
+    padding: 25px 20px;
+
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.logo h2 {
+    margin: 0;
+
+    font-size: 20px;
+}
+
+.logo span {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    color: #777;
+}
+
+
+/* NAVEGAÇÃO */
+
+.menu nav {
+    padding: 15px 10px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-bottom: 5px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    color: #555;
+
+    font-size: 14px;
+
+    transition: background 0.15s ease;
+}
+
+.menu-item span {
+    width: 20px;
+
+    text-align: center;
+}
+
+.menu-item:hover {
+    background: #f1f2f4;
+}
+
+
+/* ITEM ATIVO */
+
+.menu-item.ativo {
+    background: #e9edf5;
+
+    color: #1f4d8f;
+
+    font-weight: bold;
+}
+
+
+/* PARTE INFERIOR */
+
+.menu-final {
+    margin-top: auto;
+
+    padding: 10px;
+
+    border-top: 1px solid #e2e2e2;
+}
+
+
+/* BOTÃO SAIR */
+
+.sair {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 0;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    text-align: left;
+
+    color: #b33a3a;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: background 0.15s ease;
+}
+
+.sair:hover {
+    background: #fdf0f0;
+}
+
+.sair span {
+    width: 20px;
+
+    text-align: center;
+}
+
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+
+.conteudo {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 100vh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background: #f5f6f8;
+}
+
+
+/* =========================
+   PÁGINA DE DISPONIBILIDADE
 ========================= */
 
 .pagina-disponibilidade {
-  width: 100%;
-  padding: 30px 40px;
+    width: 100%;
+
+    padding: 30px 40px;
 }
 
 
@@ -25,17 +210,19 @@ body {
 ========================= */
 
 .cabecalho {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .cabecalho h1 {
-  margin: 0;
-  font-size: 28px;
+    margin: 0;
+
+    font-size: 28px;
 }
 
 .cabecalho p {
-  margin: 8px 0 0;
-  color: #6f6f6f;
+    margin: 8px 0 0;
+
+    color: #6f6f6f;
 }
 
 
@@ -44,37 +231,40 @@ body {
 ========================= */
 
 .legenda {
-  display: flex;
-  gap: 25px;
+    display: flex;
 
-  margin-bottom: 15px;
+    gap: 25px;
 
-  font-size: 14px;
+    margin-bottom: 15px;
+
+    font-size: 14px;
 }
 
 .legenda-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
 }
 
 .legenda-disponivel,
 .legenda-indisponivel {
-  width: 18px;
-  height: 18px;
+    width: 18px;
+    height: 18px;
 
-  border-radius: 4px;
+    border-radius: 4px;
 
-  display: inline-block;
+    display: inline-block;
 }
 
 .legenda-disponivel {
-  background: #1f4d8f;
+    background: #1f4d8f;
 }
 
 .legenda-indisponivel {
-  background: #ffffff;
-  border: 1px solid #cfd3d8;
+    background: #ffffff;
+
+    border: 1px solid #cfd3d8;
 }
 
 
@@ -83,60 +273,65 @@ body {
 ========================= */
 
 .tabela-container {
-  width: 100%;
+    width: 100%;
 
-  background: #ffffff;
+    background: #ffffff;
 
-  border: 1px solid #dfe3e8;
-  border-radius: 8px;
+    border: 1px solid #dfe3e8;
 
-  overflow-x: auto;
+    border-radius: 8px;
+
+    overflow-x: auto;
 }
 
 .grade-horarios {
-  width: 100%;
+    width: 100%;
 
-  border-collapse: collapse;
+    border-collapse: collapse;
 
-  table-layout: fixed;
+    table-layout: fixed;
 }
 
 
 /* CABEÇALHO DA TABELA */
 
 .grade-horarios thead th {
-  height: 60px;
+    height: 60px;
 
-  background: #f8f9fa;
+    background: #f8f9fa;
 
-  border-bottom: 2px solid #dfe3e8;
+    border-bottom: 2px solid #dfe3e8;
 
-  font-size: 16px;
-  font-weight: bold;
+    font-size: 16px;
 
-  text-align: center;
+    font-weight: bold;
+
+    text-align: center;
 }
 
 .grade-horarios .coluna-horario {
-  width: 155px;
+    width: 155px;
 }
 
 
-/* LINHAS */
+/* =========================
+   LINHAS
+========================= */
 
 .grade-horarios tbody tr {
-  height: 58px;
+    height: 58px;
 }
 
 .grade-horarios td {
-  border-right: 1px solid #e0e0e0;
-  border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
 
-  text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+
+    text-align: center;
 }
 
 .grade-horarios td:last-child {
-  border-right: none;
+    border-right: none;
 }
 
 
@@ -145,27 +340,27 @@ body {
 ========================= */
 
 .horario {
-  padding: 5px 10px;
+    padding: 5px 10px;
 
-  background: #fafafa;
+    background: #fafafa;
 }
 
 .horario strong {
-  display: block;
+    display: block;
 
-  font-size: 12px;
+    font-size: 12px;
 
-  color: #777;
+    color: #777;
 }
 
 .horario span {
-  display: block;
+    display: block;
 
-  margin-top: 3px;
+    margin-top: 3px;
 
-  font-size: 13px;
+    font-size: 13px;
 
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 
@@ -174,74 +369,75 @@ body {
 ========================= */
 
 .celula {
-  width: 100%;
-  height: 58px;
+    width: 100%;
+    height: 58px;
 
-  display: flex;
+    display: flex;
 
-  align-items: center;
-  justify-content: center;
+    align-items: center;
+    justify-content: center;
 
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .celula input {
-  display: none;
+    display: none;
 }
 
 
-/* Marcador */
+/* MARCADOR */
 
 .marcador {
-  width: 26px;
-  height: 26px;
+    width: 26px;
+    height: 26px;
 
-  border: 2px solid #cfd3d8;
+    border: 2px solid #cfd3d8;
 
-  border-radius: 6px;
+    border-radius: 6px;
 
-  transition: 0.15s;
+    transition: 0.15s;
 }
 
 
-/* Hover */
+/* HOVER */
 
 .celula:hover {
-  background: #f5f7fa;
+    background: #f5f7fa;
 }
 
 .celula:hover .marcador {
-  border-color: #1f4d8f;
+    border-color: #1f4d8f;
 }
 
 
-/* Marcado */
+/* MARCADO */
 
 .celula input:checked + .marcador {
-  background: #1f4d8f;
+    background: #1f4d8f;
 
-  border-color: #1f4d8f;
+    border-color: #1f4d8f;
 
-  position: relative;
+    position: relative;
 }
 
 
-/* Check */
+/* CHECK */
 
 .celula input:checked + .marcador::after {
-  content: "✓";
+    content: "✓";
 
-  position: absolute;
+    position: absolute;
 
-  left: 50%;
-  top: 50%;
+    left: 50%;
+    top: 50%;
 
-  transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
-  color: white;
+    color: white;
 
-  font-size: 16px;
-  font-weight: bold;
+    font-size: 16px;
+
+    font-weight: bold;
 }
 
 
@@ -250,18 +446,19 @@ body {
 ========================= */
 
 .intervalo td {
-  height: 30px;
+    height: 30px;
 
-  background: #f1f2f4;
+    background: #f1f2f4;
 
-  color: #777;
+    color: #777;
 
-  font-size: 12px;
-  font-weight: bold;
+    font-size: 12px;
 
-  text-transform: uppercase;
+    font-weight: bold;
 
-  letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
 }
 
 
@@ -270,47 +467,53 @@ body {
 ========================= */
 
 .acoes {
-  display: flex;
+    display: flex;
 
-  justify-content: flex-end;
+    justify-content: flex-end;
 
-  gap: 12px;
+    gap: 12px;
 
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .acoes button {
-  padding: 11px 20px;
+    padding: 11px 20px;
 
-  border-radius: 6px;
+    border-radius: 6px;
 
-  font-size: 14px;
+    font-size: 14px;
 
-  cursor: pointer;
+    cursor: pointer;
 }
 
+
+/* BOTÃO SECUNDÁRIO */
+
 .botao-secundario {
-  background: white;
+    background: white;
 
-  border: 1px solid #cfd3d8;
+    border: 1px solid #cfd3d8;
 
-  color: #555;
+    color: #555;
 }
 
 .botao-secundario:hover {
-  background: #f1f2f4;
+    background: #f1f2f4;
 }
 
+
+/* BOTÃO PRINCIPAL */
+
 .botao-principal {
-  background: #1f4d8f;
+    background: #1f4d8f;
 
-  border: 1px solid #1f4d8f;
+    border: 1px solid #1f4d8f;
 
-  color: white;
+    color: white;
 }
 
 .botao-principal:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 
@@ -320,24 +523,28 @@ body {
 
 @media (max-width: 800px) {
 
-  .pagina-disponibilidade {
-    padding: 20px;
-  }
+    .menu {
+        width: 200px;
+        min-width: 200px;
+    }
 
-  .tabela-container {
-    overflow-x: auto;
-  }
+    .pagina-disponibilidade {
+        padding: 20px;
+    }
 
-  .grade-horarios {
-    min-width: 750px;
-  }
+    .tabela-container {
+        overflow-x: auto;
+    }
 
-  .acoes {
-    flex-direction: column;
-  }
+    .grade-horarios {
+        min-width: 750px;
+    }
 
-  .acoes button {
-    width: 100%;
-  }
+    .acoes {
+        flex-direction: column;
+    }
 
+    .acoes button {
+        width: 100%;
+    }
 }

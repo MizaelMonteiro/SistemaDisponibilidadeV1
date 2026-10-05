@@ -15,7 +15,7 @@
         Início
       </a>
 
-      <a href="#" class="menu-item">
+      <a href="/minha-disponibilidade" class="menu-item">
         <span>◷</span>
         Minha disponibilidade
       </a>
@@ -78,8 +78,8 @@
         </div>
 
         <div> 
-          <strong>Professor</strong>
-          <small>Usuário</small>
+          <strong>{{ nomeProfessor() }}</strong>
+          <small>Professor</small>
         </div>
 
       </div>
@@ -111,30 +111,24 @@
 
         <div class="status-conteudo">
 
-          <span class="titulo">
-            Minha disponibilidade
-          </span>
-
-          <strong>
-            Ainda não cadastrada
-          </strong>
-
-          <p>
-            Informe os dias e horários em que você
-            estará disponível para ministrar aulas.
-          </p>
+          
+          
+          
           @if(estaLogado){
             
             <button onclick="window.location.href='/cadastrarDispo'">
-              Informar disponibilidade
+              Editar minha disponibilidade
             </button>
           }@else {
             
             <button onclick="window.location.href='/login'">
-              Informar disponibilidade
+              Editar minha disponibilidade
             </button>
           }
-          
+          <p>
+            Informe os dias e horários em que você
+            estará disponível para ministrar aulas.
+          </p>
 
         </div>
 
