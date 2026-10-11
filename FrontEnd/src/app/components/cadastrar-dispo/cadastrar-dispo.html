@@ -1,6 +1,6 @@
 <div class="pagina">
 
-    <!-- MENU LATERAL -->
+    <!-- 
     <aside class="menu">
 
         <div class="logo">
@@ -26,27 +26,27 @@
 
             @if (estaLogado) {
 
-                <a routerLink="/perfil" class="menu-item">
-                    <span>◉</span>
-                    Meu perfil
-                </a>
+            <a routerLink="/perfil" class="menu-item">
+                <span>◉</span>
+                Meu perfil
+            </a>
 
-                <button class="sair" (click)="logout()">
-                    <span>⇥</span>
-                    Sair
-                </button>
+            <button class="sair" (click)="logout()">
+                <span>⇥</span>
+                Sair
+            </button>
 
             } @else {
 
-                <a href="/login" class="menu-item">
-                    <span>⇥</span>
-                    Entrar
-                </a>
+            <a href="/login" class="menu-item">
+                <span>⇥</span>
+                Entrar
+            </a>
 
-                <a href="/criar" class="menu-item">
-                    <span>+</span>
-                    Criar conta
-                </a>
+            <a href="/criar" class="menu-item">
+                <span>+</span>
+                Criar conta
+            </a>
 
             }
 
@@ -54,10 +54,10 @@
 
     </aside>
 
-
+-->
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="conteudo">
-        
+
 
         <div class="pagina-disponibilidade">
 
@@ -72,26 +72,18 @@
                     </p>
                 </div>
                 <div class="acoes">
-                    <a href="/minha-disponibilidade" >
+                    <a href="/minha-disponibilidade">
                         Cancelar
                     </a>
 
-                    <button
-                        class="botao-secundario"
-                        type="button"
-                        (click)="limparSelecao()"
-                    >
+                    <button class="botao-secundario" type="button" (click)="limparSelecao()">
                         Limpar seleção
                     </button>
 
-                    <button
-                        class="botao-principal"
-                        type="button"
-                        (click)="salvarDisponibilidade()"
-                    >
+                    <button class="botao-principal" type="button" (click)="salvarDisponibilidade()">
                         Salvar disponibilidade
                     </button>
-                    </div>
+                </div>
 
             </header>
 
@@ -152,116 +144,101 @@
 
                         @for (linha of linhas(); track linha.segunda.IdHorario) {
 
-                            <tr>
+                        <tr>
 
-                                <td class="horario">
+                            <td class="horario">
 
-                                    <strong>
-                                        {{ linha.segunda.IdHorario }}
-                                    </strong>
+                                <strong>
+                                    {{ linha.segunda.IdHorario }}
+                                </strong>
 
-                                    <span>
-                                        {{ linha.hora }}
-                                    </span>
+                                <span>
+                                    {{ linha.hora }}
+                                </span>
 
-                                </td>
-
-
-                                <!-- SEGUNDA -->
-
-                                <td>
-
-                                    <label class="celula">
-
-                                        <input
-                                            type="checkbox"
-                                            [checked]="estaSelecionado(linha.segunda.IdHorario)"
-                                            (change)="alternarHorario(linha.segunda.IdHorario, $event)"
-                                        >
-
-                                        <span class="marcador"></span>
-
-                                    </label>
-
-                                </td>
+                            </td>
 
 
-                                <!-- TERÇA -->
+                            <!-- SEGUNDA -->
 
-                                <td>
+                            <td>
 
-                                    <label class="celula">
+                                <label class="celula">
 
-                                        <input
-                                            type="checkbox"
-                                            [checked]="estaSelecionado(linha.terca.IdHorario)"
-                                            (change)="alternarHorario(linha.terca.IdHorario, $event)"
-                                        >
+                                    <input type="checkbox" [checked]="estaSelecionado(linha.segunda.IdHorario)"
+                                        (change)="alternarHorario(linha.segunda.IdHorario, $event)">
 
-                                        <span class="marcador"></span>
+                                    <span class="marcador"></span>
 
-                                    </label>
+                                </label>
 
-                                </td>
+                            </td>
 
 
-                                <!-- QUARTA -->
+                            <!-- TERÇA -->
 
-                                <td>
+                            <td>
 
-                                    <label class="celula">
+                                <label class="celula">
 
-                                        <input
-                                            type="checkbox"
-                                            [checked]="estaSelecionado(linha.quarta.IdHorario)"
-                                            (change)="alternarHorario(linha.quarta.IdHorario, $event)"
-                                        >
+                                    <input type="checkbox" [checked]="estaSelecionado(linha.terca.IdHorario)"
+                                        (change)="alternarHorario(linha.terca.IdHorario, $event)">
 
-                                        <span class="marcador"></span>
+                                    <span class="marcador"></span>
 
-                                    </label>
+                                </label>
 
-                                </td>
+                            </td>
 
 
-                                <!-- QUINTA -->
+                            <!-- QUARTA -->
 
-                                <td>
+                            <td>
 
-                                    <label class="celula">
+                                <label class="celula">
 
-                                        <input
-                                            type="checkbox"
-                                            [checked]="estaSelecionado(linha.quinta.IdHorario)"
-                                            (change)="alternarHorario(linha.quinta.IdHorario, $event)"
-                                        >
+                                    <input type="checkbox" [checked]="estaSelecionado(linha.quarta.IdHorario)"
+                                        (change)="alternarHorario(linha.quarta.IdHorario, $event)">
 
-                                        <span class="marcador"></span>
+                                    <span class="marcador"></span>
 
-                                    </label>
+                                </label>
 
-                                </td>
+                            </td>
 
 
-                                <!-- SEXTA -->
+                            <!-- QUINTA -->
 
-                                <td>
+                            <td>
 
-                                    <label class="celula">
+                                <label class="celula">
 
-                                        <input
-                                            type="checkbox"
-                                            [checked]="estaSelecionado(linha.sexta.IdHorario)"
-                                            (change)="alternarHorario(linha.sexta.IdHorario, $event)"
-                                        >
+                                    <input type="checkbox" [checked]="estaSelecionado(linha.quinta.IdHorario)"
+                                        (change)="alternarHorario(linha.quinta.IdHorario, $event)">
 
-                                        <span class="marcador"></span>
+                                    <span class="marcador"></span>
 
-                                    </label>
+                                </label>
 
-                                </td>
+                            </td>
 
-                            </tr>
+
+                            <!-- SEXTA -->
+
+                            <td>
+
+                                <label class="celula">
+
+                                    <input type="checkbox" [checked]="estaSelecionado(linha.sexta.IdHorario)"
+                                        (change)="alternarHorario(linha.sexta.IdHorario, $event)">
+
+                                    <span class="marcador"></span>
+
+                                </label>
+
+                            </td>
+
+                        </tr>
 
                         }
 
@@ -272,7 +249,7 @@
             </div>
 
 
-           
+
 
         </div>
 

@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.pagina {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+app-menu-lateral {
+  display: block;
+  flex: 0 0 250px;
+}
+
+.conteudo {
+  flex: 1;
+  min-width: 0;
+
+}
