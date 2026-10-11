@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Horario } from '../../services/horario';
 import { HorariosService } from '../../services/horario-service';
@@ -26,6 +27,7 @@ export class CadastrarDispo implements OnInit {
   readonly #horariosService = inject(HorariosService);
 
   readonly #disponibilidadeService = inject(DisponibilidadeService);
+  readonly #router = inject(Router);
 
   protected horarios = signal<Horario[]>([]);
 
@@ -126,9 +128,13 @@ export class CadastrarDispo implements OnInit {
     this.#disponibilidadeService.salvarDisponibilidade(horarios).subscribe({
       next: (resposta) => {
         console.log('Disponibilidade salva:', resposta);
+
+        //redirecionar pára a pagina minha disponibilidade
+        this.#router.navigate(['/minha-disponibilidade']);
       },
       error: (erro) => {
         console.error('Erro ao salvar disponibilidade:', erro);
+
       },
     });
   }

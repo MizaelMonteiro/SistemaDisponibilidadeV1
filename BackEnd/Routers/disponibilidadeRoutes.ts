@@ -1,6 +1,7 @@
 import { Router } from "express";
 import disponibilidadeController from "../controllers/disponibilidadeController.ts";
 import { authToken } from "../middlewares/authToken.ts";
+import { authCoordenador } from "../middlewares/authCoordenador.ts";
 import professorModel from "../models/professorModel.ts";
 
 const router = Router();
@@ -22,7 +23,12 @@ router.get("/", authToken, (req, res) => {
         });
 });
 
-
+router.get(
+    "/professor/:idProfessor",
+    authToken,
+    authCoordenador,
+    disponibilidadeController.consultarDisponibilidadeProfessor
+);
 
 router.get("/:idProfessor",authToken, (req, res) => {
 

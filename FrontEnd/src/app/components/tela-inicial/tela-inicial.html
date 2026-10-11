@@ -9,8 +9,18 @@
     </div>
 
     <nav>
+      @if(estaLogado && nivelAcesso() === 'COORDENADOR') {
+        <a href="#" class="menu-item ativo">
+          <span>⌂</span>
+            Início
+        </a>
 
-      <a href="#" class="menu-item ativo">
+        <a href="/professores" class="menu-item">
+          <span>◷</span>
+            Professores
+        </a>
+      }@else {
+        <a href="#" class="menu-item ativo">
         <span>⌂</span>
         Início
       </a>
@@ -19,6 +29,8 @@
         <span>◷</span>
         Minha disponibilidade
       </a>
+      }
+      
 
     </nav>
 
@@ -26,7 +38,7 @@
 
       @if (estaLogado) {
 
-      <a routerLink="/perfil" class="menu-item">
+      <a href="/perfil" class="menu-item">
         <span>◉</span>
         Meu perfil
       </a>
@@ -70,33 +82,33 @@
       </div>
       @if(estaLogado){
 
-      
+
       <div class="usuario">
 
         <div class="avatar">
-          P
+          {{ nivelAcesso().charAt(0).toUpperCase() }}
         </div>
 
-        <div> 
-          <strong>{{ nomeProfessor() }}</strong>
-          <small>Professor</small>
+        <div>
+          <strong>{{ nomeUsuario() }}</strong>
+          <small>{{nivelAcesso().toLowerCase()}}</small>
         </div>
 
       </div>
-    }@else {
+      }@else {
       <div class="usuario">
 
         <div class="avatar">
           A
         </div>
 
-        <div> 
+        <div>
           <strong>Anônimo</strong>
           <small>Login não efetuado</small>
         </div>
 
       </div>
-    }
+      }
     </header>
 
 
@@ -111,19 +123,19 @@
 
         <div class="status-conteudo">
 
-          
-          
-          
-          @if(estaLogado){
-            
-            <button onclick="window.location.href='/cadastrarDispo'">
-              Editar minha disponibilidade
-            </button>
+
+
+
+          @if(estaLogado && nivelAcesso() === 'PROFESSOR') {
+
+          <button onclick="window.location.href='/cadastrarDispo'">
+            Editar minha disponibilidade
+          </button>
           }@else {
-            
-            <button onclick="window.location.href='/login'">
-              Editar minha disponibilidade
-            </button>
+
+          <button onclick="window.location.href='/login'">
+            Apenas professores podem editar sua disponibilidade. Faça login para acessar.
+          </button>
           }
           <p>
             Informe os dias e horários em que você

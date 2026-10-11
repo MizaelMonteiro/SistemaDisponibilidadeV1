@@ -14,7 +14,12 @@ export class ProfessorService {
 
     buscarProfessor(): Observable<Professor> {
         return this.#http.get<Professor>(
-            `${this.API}/professor`
+            `${this.API}/professores/buscarIndividual`
+        );
+    }
+    buscarTodosProfessores(): Observable<Professor[]> {
+        return this.#http.get<Professor[]>(
+            `${this.API}/professores`
         );
     }
 }

@@ -4,6 +4,8 @@ import usuariosController from "../controllers/usuariosController.ts";
 
 import { authToken } from "../middlewares/authToken.ts";
 
+
+
 const router = Router();
 
 router.get("/", authToken,(req, res) => {
@@ -15,6 +17,17 @@ router.get("/", authToken,(req, res) => {
         .catch((error) => res.status(400).json(error.message));
 });
 
+router.get(
+  '/me',
+  authToken,
+  usuariosController.buscarUsuarioAutenticado
+);
+
+router.get(
+  '/perfil',
+  authToken,
+  usuariosController.buscarUsuarioPorIdParaPerfil
+);
 
 router.post("/", (req, res) => {
 
@@ -67,10 +80,13 @@ router.delete("/:id", (req, res) => {
 router.get("/protegida", authToken, (req, res) => {
 
     res.json({
-        message: "Acessando rota protegida"
+        message: "Acessando rota protegida e exclusiva para coordenadores.", 
+        
     });
 
 });
+
+
 
 
 export default router;

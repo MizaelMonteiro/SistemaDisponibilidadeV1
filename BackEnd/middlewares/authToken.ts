@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import type { JwtPayload } from "jsonwebtoken";
 
 
 export function authToken(
@@ -7,11 +8,13 @@ export function authToken(
     res: Response,
     next: NextFunction
 ) {
+    
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
         return res.status(401).json({
-            mensagem: "Token não informado"
+            mensagem: "authheader não informado"
+            
         });
     }
 

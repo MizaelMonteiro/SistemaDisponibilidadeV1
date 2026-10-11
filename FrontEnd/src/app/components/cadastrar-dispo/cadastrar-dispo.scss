@@ -182,7 +182,7 @@ body {
 
 .conteudo {
     flex: 1;
-
+    
     min-width: 0;
 
     height: 100vh;
@@ -190,7 +190,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
 
-    background: #f5f6f8;
+    background-color: #4c4c4d;
 }
 
 
@@ -200,7 +200,7 @@ body {
 
 .pagina-disponibilidade {
     width: 100%;
-
+    background-color: #4c4c4d;
     padding: 30px 40px;
 }
 
@@ -211,6 +211,9 @@ body {
 
 .cabecalho {
     margin-bottom: 25px;
+    background: #f5f6f8;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .cabecalho h1 {
@@ -232,7 +235,9 @@ body {
 
 .legenda {
     display: flex;
-
+    background: #f5f6f8;
+    padding: 20px;
+    border-radius: 8px;
     gap: 25px;
 
     margin-bottom: 15px;
@@ -485,6 +490,28 @@ body {
 
     cursor: pointer;
 }
+
+.acoes a{
+    text-decoration: none;
+    background-color: #fa4343;
+    color: white;
+
+    padding: 11px 20px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.acoes a:hover{
+    background-color: #b83737;
+
+
+    cursor: pointer;
+}
+
 
 
 /* BOTÃO SECUNDÁRIO */

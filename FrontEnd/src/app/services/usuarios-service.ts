@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Usuario, UsuarioCriacao, UsuarioLogin } from '../components/exibir-usuarios/usuario';
+import { Usuario, UsuarioAutenticado, UsuarioCriacao, UsuarioLogin } from '../components/exibir-usuarios/usuario';
 import { LoginResposta } from './login';
 import { Router } from '@angular/router';
+import { UsuarioPerfil } from './usuario';
 
 @Service()
 export class UsuariosService {
@@ -36,4 +37,17 @@ export class UsuariosService {
     localStorage.removeItem('token');
     this.#router.navigate(['/login']);
   }
+
+  buscarUsuarioAutenticado() {
+    return this.#http.get<UsuarioAutenticado>(`${this.API}/usuarios/me`);
+  } 
+  consultarTodasDisponibilidades(): Observable<any> {
+    return this.#http.get(`${this.API}/disponibilidades`);
+  }
+  buscarUsuarioPorIdParaPerfil() {
+    return this.#http.get<UsuarioPerfil>(
+      `${this.API}/usuarios/perfil`
+    );
+  }
+
 }

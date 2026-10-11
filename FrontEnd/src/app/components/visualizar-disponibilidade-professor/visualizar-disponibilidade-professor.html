@@ -1,0 +1,112 @@
+<main class="pagina-disponibilidade">
+  <header class="cabecalho">
+    <button
+      type="button"
+      class="botao-voltar"
+      (click)="voltarParaProfessores()"
+    >
+      ← Voltar para professores
+    </button>
+
+    <div class="titulo">
+      <h1>Disponibilidade do professor</h1>
+
+      @if (professor(); as prof) {
+        <p>Consulte os horários disponíveis de {{ prof.Nome }}.</p>
+      }
+    </div>
+  </header>
+
+  @if (carregando()) {
+    <section class="estado">
+      <div class="carregamento"></div>
+      <p>Carregando disponibilidade...</p>
+    </section>
+  } @else if (mensagemErro()) {
+    <section class="estado erro">
+      <p>{{ mensagemErro() }}</p>
+
+      <button
+        type="button"
+        class="botao-voltar"
+        (click)="voltarParaProfessores()"
+      >
+        Voltar para a lista
+      </button>
+    </section>
+  } @else {
+    <section class="cartao-professor">
+      <div class="icone-professor" aria-hidden="true">
+        {{ professor()?.Nome?.charAt(0)?.toUpperCase() }}
+      </div>
+
+      <div>
+        <span class="rotulo">Professor selecionado</span>
+        <h2>{{ professor()?.Nome }}</h2>
+      </div>
+      <button type="button" class="botao-exportar" (click)="exportarPDF()"
+        [disabled]="carregando() || !!mensagemErro() || !professor()">
+        Exportar PDF
+      </button>
+    </section>
+
+    <section class="legenda">
+      <div class="item-legenda">
+        <span class="indicador disponivel"></span>
+        <span>Disponível</span>
+      </div>
+
+      <div class="item-legenda">
+        <span class="indicador indisponivel"></span>
+        <span>Indisponível</span>
+      </div>
+    </section>
+
+    <section class="grade-container">
+      <div class="grade">
+        <div class="celula cabecalho-horario">Horário</div>
+
+        @for (dia of diasSemana; track dia) {
+          <div class="celula cabecalho-dia">{{ dia }}</div>
+        }
+
+        @for (horario of horarios; track horario.id) {
+          <div class="celula horario-label">
+            {{ horario.hora }}
+          </div>
+
+          @for (dia of diasSemana; track dia; let diaIndex = $index) {
+            <div
+              class="celula horario-celula"
+              [class.disponivel]="horarioDisponivel(
+                obterIdHorario(diaIndex, horario.id - 1)
+              )"
+              [class.indisponivel]="!horarioDisponivel(
+                obterIdHorario(diaIndex, horario.id - 1)
+              )"
+              [attr.aria-label]="
+                dia + ', ' + horario.hora + ': ' +
+                (horarioDisponivel(
+                  obterIdHorario(diaIndex, horario.id - 1)
+                ) ? 'Disponível' : 'Indisponível')
+              "
+            >
+              <span class="texto-celula">
+                {{
+                  horarioDisponivel(
+                    obterIdHorario(diaIndex, horario.id - 1)
+                  ) ? 'Disponível' : 'Indisponível'
+                }}
+              </span>
+            </div>
+          }
+        }
+      </div>
+    </section>
+
+    <p class="observacao">
+      Esta página permite apenas visualizar a disponibilidade.
+      Para realizar alterações, utilize a funcionalidade apropriada.
+    </p>
+  }
+</main>

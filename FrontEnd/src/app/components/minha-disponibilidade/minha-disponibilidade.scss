@@ -115,7 +115,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+    gap: 16px;
+}   
+
+
 
 .cabecalho h1 {
     margin: 0 0 10px;
@@ -131,6 +134,7 @@ body {
     padding: 9px 16px;
     border: none;
     border-radius: 6px;
+    margin-left: 10px;
     cursor: pointer;
 }
 

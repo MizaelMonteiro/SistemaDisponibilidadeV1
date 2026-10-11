@@ -24,7 +24,7 @@
 
             @if (estaLogado) {
 
-            <a routerLink="/perfil" class="menu-item">
+            <a href="/perfil"class="menu-item">
                 <span>◉</span>
                 Meu perfil
             </a>
@@ -65,10 +65,16 @@
                     <strong>Disponibilidade cadastrada</strong>
                 </p>
             </div>
+            <div class="botoes">
+                <button type="button" class="botao-exportar" (click)="exportarPDF()"
+                    [disabled]="!nomeProfessor() || linhas().length === 0">
+                    Exportar PDF
+                </button>
+                <button type="button" onclick="window.location.href='/cadastrarDispo'">
+                    Alterar disponibilidade
+                </button>                
+            </div>
 
-            <button type="button" onclick="window.location.href='/cadastrarDispo'">
-                Alterar disponibilidade
-            </button>
         </div>
 
 

@@ -31,7 +31,7 @@ app.use("/usuarios", usuariorouter);
 app.use("/login", loginrouter);
 app.use("/horarios", horariorouter);
 app.use("/disponibilidade", disponibilidadeRouter);
-app.use("/professor", professorRouter);
+app.use("/professores", professorRouter);
 
 
 app.listen(3000, () => {

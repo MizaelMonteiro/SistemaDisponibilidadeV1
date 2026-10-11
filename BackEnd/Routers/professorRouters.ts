@@ -5,8 +5,15 @@ import { authToken } from "../middlewares/authToken.ts";
 
 const router = Router();
 
+router.get("/", (req, res) => {
+    const listaProfessores = professorController.buscarTodos();
 
-router.get("/", authToken, (req, res) => {
+    listaProfessores
+        .then((professores) => res.status(200).json(professores))
+        .catch((error) => res.status(400).json(error.message));
+});
+
+router.get("/buscarIndividual", authToken, (req, res) => {
 
     const usuario = req.usuario as any;
     const idUsuario = usuario.idUsuario;

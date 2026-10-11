@@ -21,4 +21,11 @@ export type UsuarioLogin = {
     senha: string;
 };
 
+export type UsuarioAutenticado = {
+  IdUsuario: number;
+  Nome: string;
+  Email: string;
+  NivelAcesso: 'PROFESSOR' | 'COORDENADOR';
+}
+
 export type NivelAcesso = "PROFESSOR" | "COORDENADOR";

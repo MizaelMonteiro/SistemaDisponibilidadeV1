@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios-service';
 import { ProfessorService } from '../../services/professor-service';
+import type {UsuarioAutenticado} from '../exibir-usuarios/usuario';
 
 @Component({
   imports: [],
@@ -11,24 +12,38 @@ import { ProfessorService } from '../../services/professor-service';
 export class TelaInicial {
   readonly #usuariosService = inject(UsuariosService)
   readonly #professorService = inject(ProfessorService);
-  protected nomeProfessor = signal('');
+  protected nomeUsuario = signal('');
+  protected nivelAcesso = signal('');
   
   ngOnInit(): void {
 
-    this.#professorService.buscarProfessor().subscribe({
-        next: (professor) => {
-            this.nomeProfessor.set(professor.Nome);
-        },
-        error: (erro) => {
-            console.error('Erro ao buscar professor:', erro);
-        }
-    });
+    this.#usuariosService.buscarUsuarioAutenticado().subscribe({
+    next: (usuario) => {
+      this.nomeUsuario.set(usuario.Nome);
+      this.nivelAcesso.set(usuario.NivelAcesso);
+    },
+    error: (erro) => {
+      console.error('Erro ao buscar usuário:', erro);
+    }
+    
+  });
+  
 
 }
 
   get estaLogado() {
     return localStorage.getItem('token') !== null;
+    
   }
+  coordenador() {
+    const nivelAcesso = this.nivelAcesso();
+    return nivelAcesso === 'COORDENADOR';
+  }
+  professor() {
+    const nivelAcesso = this.nivelAcesso();
+    return nivelAcesso === 'PROFESSOR';
+  }
+
   logout(){
     console.log("Você fez logout eu acho")
     this.#usuariosService.logout()

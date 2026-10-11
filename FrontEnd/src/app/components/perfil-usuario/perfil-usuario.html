@@ -1,0 +1,94 @@
+<main class="pagina-perfil">
+
+  <header class="cabecalho">
+    <div>
+      <h1>Meu perfil</h1>
+      <p>Consulte as informações da sua conta.</p>
+    </div>
+  </header>
+
+  @if (carregando()) {
+
+    <section class="estado-carregamento">
+      <div class="indicador-carregamento"></div>
+      <p>Carregando informações do perfil...</p>
+    </section>
+
+  } @else if (mensagemErro()) {
+
+    <section class="mensagem-erro" role="alert">
+      <p>{{ mensagemErro() }}</p>
+
+      <button
+        type="button"
+        class="botao-tentar-novamente"
+        (click)="buscarPerfil()">
+        Tentar novamente
+      </button>
+    </section>
+
+  } @else if (usuario(); as u) {
+
+    <section class="cartao-perfil">
+
+      <div class="cabecalho-perfil">
+
+        <div class="avatar">
+          {{ obterIniciais() }}
+        </div>
+
+        <div class="identificacao">
+          <span class="rotulo">Minha conta</span>
+
+          <h2>{{ u.Nome }}</h2>
+
+          <span class="tipo-conta">
+            {{ obterNivelAcesso() }}
+          </span>
+        </div>
+
+        <span
+          class="situacao"
+          [class.inativo]="!u.Ativo">
+          {{ obterSituacao() }}
+        </span>
+
+      </div>
+
+      <div class="divisor"></div>
+
+      <section class="informacoes">
+        <h3>Informações pessoais</h3>
+
+        <div class="grade-informacoes">
+
+          <div class="campo">
+            <span class="rotulo">Nome completo</span>
+            <p>{{ u.Nome }}</p>
+          </div>
+
+          <div class="campo">
+            <span class="rotulo">E-mail</span>
+            <p>{{ u.Email }}</p>
+          </div>
+
+          <div class="campo">
+            <span class="rotulo">
+              Identificador institucional
+            </span>
+            <p>{{ u.IdentificadorInst }}</p>
+          </div>
+
+          <div class="campo">
+            <span class="rotulo">Tipo de conta</span>
+            <p>{{ obterNivelAcesso() }}</p>
+          </div>
+
+        </div>
+      </section>
+
+    </section>
+
+  }
+
+</main>

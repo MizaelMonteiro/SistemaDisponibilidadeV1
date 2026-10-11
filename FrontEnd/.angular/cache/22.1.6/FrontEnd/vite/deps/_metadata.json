@@ -1,73 +1,113 @@
 {
-  "hash": "d052d429",
-  "configHash": "43e13753",
-  "lockfileHash": "4a64c5ee",
-  "browserHash": "f6c71aee",
+  "hash": "b819907c",
+  "configHash": "1c23c7dd",
+  "lockfileHash": "87597f09",
+  "browserHash": "c27fe30c",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "b9a4d640",
+      "fileHash": "90f6fba8",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "9f7c9bc2",
+      "fileHash": "c35d454a",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "7de84469",
+      "fileHash": "e384bf5e",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "2f361eea",
+      "fileHash": "86d07a5a",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "479c9462",
+      "fileHash": "24ed572f",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "925f909c",
+      "fileHash": "09671861",
+      "needsInterop": false
+    },
+    "jspdf-autotable": {
+      "src": "../../../../../../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.mjs",
+      "file": "jspdf-autotable.js",
+      "fileHash": "f3ed14fe",
+      "needsInterop": false
+    },
+    "jspdf": {
+      "src": "../../../../../../node_modules/jspdf/dist/jspdf.es.min.js",
+      "file": "jspdf.js",
+      "fileHash": "fca07b8c",
+      "needsInterop": false
+    },
+    "jwt-decode": {
+      "src": "../../../../../../node_modules/jwt-decode/build/esm/index.js",
+      "file": "jwt-decode.js",
+      "fileHash": "31a1a660",
+      "needsInterop": false
+    },
+    "rxjs": {
+      "src": "../../../../../../node_modules/rxjs/dist/esm5/index.js",
+      "file": "rxjs.js",
+      "fileHash": "31f99884",
       "needsInterop": false
     }
   },
   "chunks": {
-    "_xhr-chunk-5V9EOpHZ": {
-      "file": "_xhr-chunk-5V9EOpHZ.js",
+    "_xhr-chunk-Cuc5HAG4": {
+      "file": "_xhr-chunk-Cuc5HAG4.js",
       "isDynamicEntry": false
     },
-    "common-5Upk85yI": {
-      "file": "common-5Upk85yI.js",
+    "common-kHfkGkKe": {
+      "file": "common-kHfkGkKe.js",
       "isDynamicEntry": false
     },
-    "core-D7y2GDtJ": {
-      "file": "core-D7y2GDtJ.js",
+    "core-B3Z81ZDD": {
+      "file": "core-B3Z81ZDD.js",
       "isDynamicEntry": false
     },
-    "createObject-C1Hiy282": {
-      "file": "createObject-C1Hiy282.js",
+    "esm5-ChK3bs0s": {
+      "file": "esm5-ChK3bs0s.js",
       "isDynamicEntry": false
     },
-    "from-DlGUgv4-": {
-      "file": "from-DlGUgv4-.js",
+    "html2canvas-lvYIdXjz": {
+      "file": "html2canvas-lvYIdXjz.js",
+      "isDynamicEntry": true
+    },
+    "http-Cwyi1QBn": {
+      "file": "http-Cwyi1QBn.js",
       "isDynamicEntry": false
     },
-    "http-D9pJofi4": {
-      "file": "http-D9pJofi4.js",
+    "index.es-BTTnyjRV": {
+      "file": "index.es-BTTnyjRV.js",
+      "isDynamicEntry": true
+    },
+    "platform-browser-CWI9ebNO": {
+      "file": "platform-browser-CWI9ebNO.js",
       "isDynamicEntry": false
     },
-    "platform-browser-BB3j3uYM": {
-      "file": "platform-browser-BB3j3uYM.js",
+    "purify.es-Q6WO_9Iv": {
+      "file": "purify.es-Q6WO_9Iv.js",
+      "isDynamicEntry": true
+    },
+    "rolldown-runtime-FDOR9p9I": {
+      "file": "rolldown-runtime-FDOR9p9I.js",
+      "isDynamicEntry": false
+    },
+    "typeof-KEtdrNHU": {
+      "file": "typeof-KEtdrNHU.js",
       "isDynamicEntry": false
     }
   }

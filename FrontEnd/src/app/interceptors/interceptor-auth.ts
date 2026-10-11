@@ -4,6 +4,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
     const token = localStorage.getItem('token');
 
+
+
     if (token) {
 
         const requisicaoComToken = req.clone({
@@ -14,6 +16,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
         return next(requisicaoComToken);
     }
+    console.log("Nenhum token encontrado, prosseguindo sem adicionar cabeçalho de autorização.");
 
     return next(req);
 };

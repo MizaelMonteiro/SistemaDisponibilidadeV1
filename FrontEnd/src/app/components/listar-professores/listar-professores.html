@@ -1,0 +1,68 @@
+<main class="pagina-professores">
+  <header class="cabecalho">
+    <div>
+      <button
+      type="button"
+      class="botao-voltar"
+      (click)="voltarParaHome()"
+    >
+      ← Voltar para a tela inicial
+    </button>
+      <h1>Professores</h1>
+      <p>
+        Consulte os professores cadastrados e visualize suas disponibilidades.
+      </p>
+    </div>
+
+    <span class="contador">
+      {{ professores().length }}
+      {{ professores().length === 1 ? 'professor' : 'professores' }}
+    </span>
+  </header>
+
+  @if (carregando()) {
+    <section class="estado">
+      <div class="carregamento"></div>
+      <p>Carregando professores...</p>
+    </section>
+  } @else if (mensagemErro()) {
+    <section class="estado erro">
+      <p>{{ mensagemErro() }}</p>
+
+      <button type="button" class="botao-secundario" (click)="buscarProfessores()">
+        Tentar novamente
+      </button>
+    </section>
+  } @else if (professores().length === 0) {
+    <section class="estado vazio">
+      <h2>Nenhum professor encontrado</h2>
+      <p>Não há professores ativos para exibir no momento.</p>
+    </section>
+  } @else {
+    <section class="lista-professores">
+      @for (professor of professores(); track professor.IdProfessor) {
+        <article class="cartao-professor">
+          <div class="informacoes-professor">
+            <div class="icone-professor" aria-hidden="true">
+              {{ professor.Nome.charAt(0).toUpperCase() }}
+            </div>
+
+            <div class="dados-professor">
+              <h2>{{ professor.Nome }}</h2>
+              <p>Professor</p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="botao-consultar"
+            (click)="consultarDisponibilidade(professor.IdProfessor)"
+          >
+            Ver disponibilidade
+            <span aria-hidden="true">→</span>
+          </button>
+        </article>
+      }
+    </section>
+  }
+</main>

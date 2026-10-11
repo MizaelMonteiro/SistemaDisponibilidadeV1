@@ -1,14 +1,10 @@
 import conexao from "../infraestrutura/conexao.ts";
 
-import type {
-    UsuarioCriacao,
-    UsuarioAtualizacao
-} from "./usuario.ts";
+import type { UsuarioCriacao, UsuarioAtualizacao } from "./usuario.ts";
 
 export class UsuariosModel {
-
-    listar() {
-        const sql = `SELECT
+  listar() {
+    const sql = `SELECT
         IdUsuario AS idUsuario,
         Nome AS nome,
         IdentificadorInst AS identificadorInst,
@@ -18,85 +14,113 @@ export class UsuariosModel {
         Ativo AS ativo
         FROM Usuario`;
 
-        return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      conexao.query(sql, (error, resposta) => {
+        if (error) {
+          console.log("Deu erro no select");
+          reject(error);
+          return;
+        }
 
-            conexao.query(sql, (error, resposta) => {
+        console.log("Listar deu certo");
+        resolve(resposta);
+      });
+    });
+  }
 
-                if (error) {
-                    console.log("Deu erro no select");
-                    reject(error);
-                    return;
-                }
+  consultarUsuarioPorIdParaPerfil(idUsuario: number) {
+  const sql = `
+    SELECT
+      IdUsuario,
+      Nome,
+      IdentificadorInst,
+      Email,
+      NivelAcesso,
+      Ativo
+    FROM Usuario
+    WHERE IdUsuario = ?;
+  `;
 
-                console.log("Listar deu certo");
-                resolve(resposta);
-            });
-        });
-    }
+  return new Promise((resolve, reject) => {
+    conexao.query(sql, [idUsuario], (error, resposta) => {
+      if (error) {
+        reject(error);
+        return;
+      }
 
+      resolve(resposta);
+    });
+  });
+}
 
-    criar(novoUsuario: UsuarioCriacao) {
-        const sql = "INSERT INTO Usuario SET ?";
+  consultarUsuarioPorId(idUsuario: number) {
+    const sql = `
+    SELECT IdUsuario, Nome, Email, NivelAcesso
+    FROM Usuario
+    WHERE IdUsuario = ?;
+  `;
 
-        return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      conexao.query(sql, [idUsuario], (error, resposta) => {
+        if (error) {
+          reject(error);
+          return;
+        }
 
-            conexao.query(sql, novoUsuario, (error, resposta) => {
+        resolve(resposta);
+      });
+    });
+  }
+  criar(novoUsuario: UsuarioCriacao) {
+    const sql = "INSERT INTO Usuario SET ?";
 
-                if (error) {
-                    console.log("Deu erro no insert: ", error);
-                    reject(error);
-                    return;
-                }
+    return new Promise((resolve, reject) => {
+      conexao.query(sql, novoUsuario, (error, resposta) => {
+        if (error) {
+          console.log("Deu erro no insert: ", error);
+          reject(error);
+          return;
+        }
 
-                console.log("Insert deu certo");
-                resolve(resposta);
-            });
-        });
-    }
+        console.log("Insert deu certo");
+        resolve(resposta);
+      });
+    });
+  }
 
+  atualizar(usuarioAtualizado: UsuarioAtualizacao, id: number) {
+    const sql = "UPDATE Usuario SET ? WHERE IdUsuario = ?";
 
-    atualizar(usuarioAtualizado: UsuarioAtualizacao, id: number) {
-        const sql = "UPDATE Usuario SET ? WHERE IdUsuario = ?";
+    return new Promise((resolve, reject) => {
+      conexao.query(sql, [usuarioAtualizado, id], (error, resposta) => {
+        if (error) {
+          console.log("Deu erro no update");
+          reject(error);
+          return;
+        }
 
-        return new Promise((resolve, reject) => {
+        console.log("Update deu certo");
+        resolve(resposta);
+      });
+    });
+  }
 
-            conexao.query(
-                sql,
-                [usuarioAtualizado, id],
-                (error, resposta) => {
+  deletar(id: number) {
+    const sql = "DELETE FROM Usuario WHERE IdUsuario = ?";
 
-                    if (error) {
-                        console.log("Deu erro no update");
-                        reject(error);
-                        return;
-                    }
+    return new Promise((resolve, reject) => {
+      conexao.query(sql, [id], (error, resposta) => {
+        if (error) {
+          console.log("Deu erro no deletar");
+          reject(error);
+          return;
+        }
 
-                    console.log("Update deu certo");
-                    resolve(resposta);
-                }
-            );
-        });
-    }
-
-
-    deletar(id: number) {
-        const sql = "DELETE FROM Usuario WHERE IdUsuario = ?";
-
-        return new Promise((resolve, reject) => {
-
-            conexao.query(sql, [id], (error, resposta) => {
-
-                if (error) {
-                    console.log("Deu erro no deletar");
-                    reject(error);
-                    return;
-                }
-
-                console.log("Deletar deu certo");
-                resolve(resposta);
-            });
-        });
-    }
+        console.log("Deletar deu certo");
+        resolve(resposta);
+      });
+    });
+  }
 }
 
 export default new UsuariosModel();

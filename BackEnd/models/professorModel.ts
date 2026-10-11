@@ -1,6 +1,31 @@
 import conexao from "../infraestrutura/conexao.ts";
 
 export class ProfessorModel {
+  obterTodosProfessores() {
+    const sql = `
+        SELECT
+          p.IdProfessor,
+          u.Nome
+        FROM Professor p
+        INNER JOIN Usuario u
+          ON p.IdUsuario = u.IdUsuario
+        WHERE p.Ativo = 1
+          AND u.Ativo = 1
+        ORDER BY u.Nome;
+    `;
+
+    return new Promise((resolve, reject) => {
+      conexao.query(sql, (error, resposta) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve(resposta);
+      });
+    });
+  }
+
   criar(idUsuario: number) {
     const sql = `
             INSERT INTO Professor
@@ -63,8 +88,7 @@ export class ProfessorModel {
     });
   }
 
-
-    buscarProfessorPorUsuario(idUsuario: number) {
+  buscarProfessorPorUsuario(idUsuario: number) {
     const sql = `
         SELECT
             p.IdProfessor,
@@ -88,7 +112,7 @@ export class ProfessorModel {
       });
     });
   }
-
+  
 }
 
 export default new ProfessorModel();

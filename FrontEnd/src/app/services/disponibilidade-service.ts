@@ -16,6 +16,11 @@ export class DisponibilidadeService {
       `${this.API}/disponibilidade`
     );
   }
+  buscarDisponibilidadeProfessor(idProfessor: number) {
+  return this.#http.get<Disponibilidade[]>(
+    `${this.API}/disponibilidade/professor/${idProfessor}`
+  );
+}
 
   salvarDisponibilidade(horarios: number[]) {
     return this.#http.post(

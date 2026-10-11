@@ -33,9 +33,11 @@ export class CriarUsuario {
             .subscribe({
                 next: resposta => {
                     console.log("Usuário criado!", resposta);
+                    alert("Usuário criado com sucesso!");
                 },
                 error: erro => {
                     console.log("Erro:", erro);
+                    alert("Erro ao criar usuário!");
                 }
             });
     }

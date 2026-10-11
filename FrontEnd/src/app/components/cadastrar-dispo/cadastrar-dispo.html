@@ -57,6 +57,7 @@
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="conteudo">
+        
 
         <div class="pagina-disponibilidade">
 
@@ -70,6 +71,27 @@
                         para ministrar aulas.
                     </p>
                 </div>
+                <div class="acoes">
+                    <a href="/minha-disponibilidade" >
+                        Cancelar
+                    </a>
+
+                    <button
+                        class="botao-secundario"
+                        type="button"
+                        (click)="limparSelecao()"
+                    >
+                        Limpar seleção
+                    </button>
+
+                    <button
+                        class="botao-principal"
+                        type="button"
+                        (click)="salvarDisponibilidade()"
+                    >
+                        Salvar disponibilidade
+                    </button>
+                    </div>
 
             </header>
 
@@ -250,25 +272,7 @@
             </div>
 
 
-            <div class="acoes">
-
-                <button
-                    class="botao-secundario"
-                    type="button"
-                    (click)="limparSelecao()"
-                >
-                    Limpar seleção
-                </button>
-
-                <button
-                    class="botao-principal"
-                    type="button"
-                    (click)="salvarDisponibilidade()"
-                >
-                    Salvar disponibilidade
-                </button>
-
-            </div>
+           
 
         </div>
 

@@ -8,25 +8,33 @@
 
 </head>
 
-    <body>
+<body>
+
+    <form (ngSubmit)="criarUsuario()">
+
+        <label for="nome">Nome:</label>
+        <input id="nome" type="text" name="nome" [(ngModel)]="nome" required>
+
+        <label for="nivelAcesso">Tipo de conta:</label>
+        <select id="nivelAcesso" name="nivelAcesso" [(ngModel)]="nivelAcesso" required>
+            <option value="PROFESSOR">Professor</option>
+            <option value="COORDENADOR">Coordenador</option>
+        </select>
+
+        <label for="identificadorInst">Identificador institucional:</label>
+        <input id="identificadorInst" type="text" name="identificadorInst" [(ngModel)]="identificadorInst" required>
+
+        <label for="email">E-mail:</label>
+        <input id="email" type="email" name="email" [(ngModel)]="email" required>
+
+        <label for="senha">Senha:</label>
+        <input id="senha" type="password" name="senha" [(ngModel)]="senha" required>
+
         
-        <form (ngSubmit)="criarUsuario()">
-            <h2>Cadastrar</h2>
-            <input type="text" placeholder="Nome" [(ngModel)]="nome" name="nome">
 
+        <button type="submit">Criar usuário</button>
 
-
-            <input type="identificadorInst" placeholder="Identificardor Institucional" [(ngModel)]="identificadorInst" name="identificadorInst">
-
-            <input type="email" placeholder="Email" [(ngModel)]="email" name="email">
-
-            <input type="password" placeholder="Senha" [(ngModel)]="senha" name="senha">
-
-            <button type="submit">
-                Cadastrar
-            </button>
-
-        </form>
-    </body>
+    </form>
+</body>
 
 </html>
