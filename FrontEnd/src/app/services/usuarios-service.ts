@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Service } from '@angular/core';
+import { inject, Service, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario, UsuarioAutenticado, UsuarioCriacao, UsuarioLogin } from '../components/exibir-usuarios/usuario';
 import { LoginResposta } from './login';
@@ -12,7 +12,7 @@ export class UsuariosService {
   readonly #http = inject(HttpClient);
 
   readonly #router = inject(Router);
-
+  readonly usuarioAtualizado = signal(0);
   obterTodos(): Observable<Usuario[]> {
     return this.#http.get<Usuario[]>(`${this.API}/usuarios`);
   }
@@ -32,6 +32,11 @@ export class UsuariosService {
         usuario
     );
   }
+  
+
+  notificarLogin() {
+    this.usuarioAtualizado.update(valor => valor + 1);
+  }
 
   logout() {
     localStorage.removeItem('token');
@@ -49,5 +54,7 @@ export class UsuariosService {
       `${this.API}/usuarios/perfil`
     );
   }
+
+
 
 }

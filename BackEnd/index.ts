@@ -7,6 +7,7 @@ import loginrouter from "./Routers/loginRoutes.ts";
 import horariorouter from "./Routers/horarioRoutes.ts";
 import disponibilidadeRouter from "./Routers/disponibilidadeRoutes.ts";
 import professorRouter from "./Routers/professorRouters.ts";
+import justificaticaRouter from "./Routers/justificativaRoutes.ts";
 
 import conexao from "./infraestrutura/conexao.ts";
 
@@ -32,6 +33,7 @@ app.use("/login", loginrouter);
 app.use("/horarios", horariorouter);
 app.use("/disponibilidade", disponibilidadeRouter);
 app.use("/professores", professorRouter);
+app.use("/justificativa", justificaticaRouter);
 
 
 app.listen(3000, () => {

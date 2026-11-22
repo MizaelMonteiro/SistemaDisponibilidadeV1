@@ -23,21 +23,22 @@ interface LinhaHorario {
   templateUrl: './cadastrar-dispo.html',
 })
 export class CadastrarDispo implements OnInit {
-  readonly #usuariosService = inject(UsuariosService)
+  readonly #usuariosService = inject(UsuariosService);
   readonly #horariosService = inject(HorariosService);
 
   readonly #disponibilidadeService = inject(DisponibilidadeService);
   readonly #router = inject(Router);
 
   protected horarios = signal<Horario[]>([]);
-
   protected linhas = signal<LinhaHorario[]>([]);
-
   protected horariosSelecionados = signal<number[]>([]);
 
-  ngOnInit(): void {
-    
+  protected mostrarModalJustificativa = signal(false);
+  protected justificativa = signal('');
+  protected quantidadeIndisponivel = signal(0);
 
+  ngOnInit(): void {
+    this.buscarJustificativa();
     this.#horariosService.obterTodos().subscribe({
       next: (horarios) => {
         //console.log('Horários recebidos:', horarios);
@@ -121,30 +122,85 @@ export class CadastrarDispo implements OnInit {
   }
 
   protected salvarDisponibilidade(): void {
-    const horarios = this.horariosSelecionados();
-
-    console.log('Horários que serão salvos:', horarios);
-
-    this.#disponibilidadeService.salvarDisponibilidade(horarios).subscribe({
-      next: (resposta) => {
-        console.log('Disponibilidade salva:', resposta);
-
-        //redirecionar pára a pagina minha disponibilidade
-        this.#router.navigate(['/minha-disponibilidade']);
-      },
-      error: (erro) => {
-        console.error('Erro ao salvar disponibilidade:', erro);
-
-      },
-    });
+    this.verificarDisponibilidade();
   }
-  
+
   get estaLogado() {
     return localStorage.getItem('token') !== null;
   }
-  logout(){
-    console.log("Você fez logout eu acho")
-    this.#usuariosService.logout()
-    console.log("Você fez logout")
+  logout() {
+    console.log('Você fez logout eu acho');
+    this.#usuariosService.logout();
+    console.log('Você fez logout');
+  }
+
+  private salvarDados(justificativa: string): void {
+    this.#disponibilidadeService
+      .salvarDisponibilidade(this.horariosSelecionados(), justificativa)
+      .subscribe({
+        next: (resposta) => {
+          console.log('Disponibilidade salva:', resposta);
+          this.#router.navigate(['/minha-disponibilidade']);
+        },
+
+        error: (erro) => {
+          console.error('Erro ao salvar disponibilidade:', erro);
+        },
+      });
+  }
+
+  protected verificarDisponibilidade(): void {
+    const horarios = this.horariosSelecionados();
+
+    const quantidadeIndisponivel = 85 - horarios.length;
+
+    if (quantidadeIndisponivel > 0) {
+      this.quantidadeIndisponivel.set(quantidadeIndisponivel);
+
+      this.mostrarModalJustificativa.set(true);
+
+      return;
+    }
+
+    this.salvarDados('');
+  }
+
+  protected confirmarJustificativa(): void {
+    const texto = this.justificativa().trim();
+
+    if (!texto) {
+      return;
+    }
+
+    this.#disponibilidadeService
+      .salvarDisponibilidade(this.horariosSelecionados(), texto)
+      .subscribe({
+        next: (resposta) => {
+          console.log('Disponibilidade salva:', resposta);
+          this.mostrarModalJustificativa.set(false);
+          this.#router.navigate(['/minha-disponibilidade']);
+        },
+
+        error: (erro) => {
+          console.error('Erro ao salvar disponibilidade:', erro);
+        },
+      });
+  }
+
+  protected cancelarJustificativa(): void {
+    this.mostrarModalJustificativa.set(false);
+  
+  }
+
+  private buscarJustificativa(): void {
+    this.#disponibilidadeService.buscarMinhaJustificativa().subscribe({
+      next: (resposta) => {
+        this.justificativa.set(resposta?.Justificativa || '');
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar justificativa:', erro);
+        console.error('Mensagem do backend:', erro.error);
+      },
+    });
   }
 }

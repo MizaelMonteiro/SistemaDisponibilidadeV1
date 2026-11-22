@@ -1,165 +1,246 @@
 <div class="pagina">
-<!-- 
-    <aside class="menu">
 
-        <div class="logo">
-            <h2>Disponibilidade</h2>
-            <span>Sistema de Horários</span>
+  <main class="conteudo">
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho">
+
+      <div class="titulo-pagina">
+
+        <h1>Minha disponibilidade</h1>
+
+        <p>
+          Consulte os dias e horários em que você está disponível.
+        </p>
+
+      </div>
+
+      <div class="botoes">
+
+        <button type="button" class="botao-exportar" (click)="exportarPDF()"
+          [disabled]="!nomeProfessor() || linhas().length === 0">
+
+          <span>↓</span>
+          Exportar PDF
+
+        </button>
+
+        <button type="button" class="botao-alterar" onclick="window.location.href='/cadastrarDispo'">
+
+          <span>✎</span>
+          Alterar disponibilidade
+
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- INFORMAÇÕES DO PROFESSOR -->
+    <section class="informacoes-professor">
+
+      <div class="informacao-professor">
+
+        <div class="informacao-icone">
+          ◉
         </div>
 
-        <nav>
+        <div>
+          <small>Professor</small>
+          <strong>{{ nomeProfessor() }}</strong>
+        </div>
 
-            <a href="#" class="menu-item">
-                <span>⌂</span>
-                Início
-            </a>
+      </div>
 
-            <a href="/minha-disponibilidade" class="menu-item ativo">
-                <span>◷</span>
-                Minha disponibilidade
-            </a>
+      <div class="informacao-professor">
 
-        </nav>
+        <div class="informacao-icone">
+          ✓
+        </div>
 
-        <div class="menu-final">
+        <div>
+          <small>Status</small>
+          <strong class="status-cadastrado">
+            Disponibilidade cadastrada
+          </strong>
+        </div>
 
-            @if (estaLogado) {
+      </div>
 
-            <a href="/perfil"class="menu-item">
-                <span>◉</span>
-                Meu perfil
-            </a>
+      <div class="informacao-professor informacao-justificativa" (click)="abrirJustificativa();" role="button"
+        tabindex="0" (keydown.enter)="abrirJustificativa()">
 
-            <button class="sair" (click)="logout()">
-                <span>⇥</span>
-                Sair
-            </button>
+        <div class="informacao-icone">
+          ☰
+        </div>
 
-            } @else {
+        <div>
+          <small>Justificativa</small>
+          <strong>Visualizar justificativa</strong>
+        </div>
 
-            <a href="/login" class="menu-item">
-                <span>⇥</span>
-                Entrar
-            </a>
+      </div>
 
-            <a href="/criar" class="menu-item">
-                <span>+</span>
-                Criar conta
-            </a>
+
+
+    </section>
+    @if (mostrarJustificativa()) {
+
+    <div class="modal-fundo" (click)="fecharJustificativa()">
+
+      <div class="modal-justificativa" (click)="$event.stopPropagation()">
+
+        <div class="modal-cabecalho">
+          <h2>Justificativa de disponibilidade</h2>
+
+          <button type="button" class="botao-fechar" (click)="fecharJustificativa()">
+            ×
+          </button>
+        </div>
+
+        <div class="modal-conteudo">
+          @if (justificativa()) {
+          <p>{{ justificativa() }}</p>
+          } @else {
+          <p>Não há justificativa cadastrada.</p>
+          }
+        </div>
+
+        <div class="modal-acoes">
+          <button type="button" (click)="fecharJustificativa()">
+            Fechar
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    }
+
+    <!-- TABELA DE DISPONIBILIDADE -->
+    <section class="secao-tabela">
+
+      <div class="titulo-tabela">
+
+        <div>
+          <h2>Grade de horários</h2>
+
+          <p>
+            Visualize sua disponibilidade durante os dias da semana.
+          </p>
+        </div>
+
+        <div class="legenda">
+
+          <span>
+            <i class="legenda-disponivel"></i>
+            Disponível
+          </span>
+
+          <span>
+            <i class="legenda-indisponivel"></i>
+            Indisponível
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="tabela-container">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Horário</th>
+              <th>Segunda</th>
+              <th>Terça</th>
+              <th>Quarta</th>
+              <th>Quinta</th>
+              <th>Sexta</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (linha of linhas(); track linha.hora) {
+
+            <tr>
+
+              <td class="hora">
+                {{ linha.hora }}
+              </td>
+
+              <td>
+                <span class="status" [class.disponivel]="estaDisponivel(linha.segunda.IdHorario)"
+                  [class.indisponivel]="!estaDisponivel(linha.segunda.IdHorario)">
+
+                  {{ estaDisponivel(linha.segunda.IdHorario)
+                  ? 'Disponível'
+                  : 'Indisponível' }}
+
+                </span>
+              </td>
+
+              <td>
+                <span class="status" [class.disponivel]="estaDisponivel(linha.terca.IdHorario)"
+                  [class.indisponivel]="!estaDisponivel(linha.terca.IdHorario)">
+
+                  {{ estaDisponivel(linha.terca.IdHorario)
+                  ? 'Disponível'
+                  : 'Indisponível' }}
+
+                </span>
+              </td>
+
+              <td>
+                <span class="status" [class.disponivel]="estaDisponivel(linha.quarta.IdHorario)"
+                  [class.indisponivel]="!estaDisponivel(linha.quarta.IdHorario)">
+
+                  {{ estaDisponivel(linha.quarta.IdHorario)
+                  ? 'Disponível'
+                  : 'Indisponível' }}
+
+                </span>
+              </td>
+
+              <td>
+                <span class="status" [class.disponivel]="estaDisponivel(linha.quinta.IdHorario)"
+                  [class.indisponivel]="!estaDisponivel(linha.quinta.IdHorario)">
+
+                  {{ estaDisponivel(linha.quinta.IdHorario)
+                  ? 'Disponível'
+                  : 'Indisponível' }}
+
+                </span>
+              </td>
+
+              <td>
+                <span class="status" [class.disponivel]="estaDisponivel(linha.sexta.IdHorario)"
+                  [class.indisponivel]="!estaDisponivel(linha.sexta.IdHorario)">
+
+                  {{ estaDisponivel(linha.sexta.IdHorario)
+                  ? 'Disponível'
+                  : 'Indisponível' }}
+
+                </span>
+              </td>
+
+            </tr>
 
             }
 
-        </div>
+          </tbody>
 
-    </aside>
--->
-    <main class="conteudo">
-        <div class="cabecalho">
-            <div>
-                <h1>Minha Disponibilidade</h1>
+        </table>
 
-                <p>
-                    Professor: <strong>{{ nomeProfessor() }}</strong>
-                </p>
+      </div>
 
-                <p>
-                    Status:
-                    <strong>Disponibilidade cadastrada</strong>
-                </p>
-            </div>
-            <div class="botoes">
-                <button type="button" class="botao-exportar" (click)="exportarPDF()"
-                    [disabled]="!nomeProfessor() || linhas().length === 0">
-                    Exportar PDF
-                </button>
-                <button type="button" onclick="window.location.href='/cadastrarDispo'">
-                    Alterar disponibilidade
-                </button>                
-            </div>
+    </section>
 
-        </div>
-
-
-        <div class="tabela-container">
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>Horário</th>
-                        <th>Segunda</th>
-                        <th>Terça</th>
-                        <th>Quarta</th>
-                        <th>Quinta</th>
-                        <th>Sexta</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    @for (linha of linhas(); track linha.hora) {
-
-                    <tr>
-
-                        <td class="hora">
-                            {{ linha.hora }}
-                        </td>
-
-                        <td>
-                            <span class="status" [class.disponivel]="estaDisponivel(linha.segunda.IdHorario)"
-                                [class.indisponivel]="!estaDisponivel(linha.segunda.IdHorario)">
-                                {{ estaDisponivel(linha.segunda.IdHorario)
-                                ? 'Disponível'
-                                : 'Indisponível' }}
-                            </span>
-                        </td>
-
-                        <td>
-                            <span class="status" [class.disponivel]="estaDisponivel(linha.terca.IdHorario)"
-                                [class.indisponivel]="!estaDisponivel(linha.terca.IdHorario)">
-                                {{ estaDisponivel(linha.terca.IdHorario)
-                                ? 'Disponível'
-                                : 'Indisponível' }}
-                            </span>
-                        </td>
-
-                        <td>
-                            <span class="status" [class.disponivel]="estaDisponivel(linha.quarta.IdHorario)"
-                                [class.indisponivel]="!estaDisponivel(linha.quarta.IdHorario)">
-                                {{ estaDisponivel(linha.quarta.IdHorario)
-                                ? 'Disponível'
-                                : 'Indisponível' }}
-                            </span>
-                        </td>
-
-                        <td>
-                            <span class="status" [class.disponivel]="estaDisponivel(linha.quinta.IdHorario)"
-                                [class.indisponivel]="!estaDisponivel(linha.quinta.IdHorario)">
-                                {{ estaDisponivel(linha.quinta.IdHorario)
-                                ? 'Disponível'
-                                : 'Indisponível' }}
-                            </span>
-                        </td>
-
-                        <td>
-                            <span class="status" [class.disponivel]="estaDisponivel(linha.sexta.IdHorario)"
-                                [class.indisponivel]="!estaDisponivel(linha.sexta.IdHorario)">
-                                {{ estaDisponivel(linha.sexta.IdHorario)
-                                ? 'Disponível'
-                                : 'Indisponível' }}
-                            </span>
-                        </td>
-
-                    </tr>
-
-                    }
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </main>
+  </main>
 
 </div>

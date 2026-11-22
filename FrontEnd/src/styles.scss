@@ -6,3 +6,33 @@ html, body {
 body {
   margin: 0;
 }
+
+
+:root {
+  --cor-fundo: #0B0F19;
+  --cor-menu: #151D2E;
+  --cor-card: #192235;
+
+  --cor-azul: #2563EB;
+  --cor-azul-destaque: #3478F6;
+
+  --cor-borda: #29364F;
+
+  --cor-texto: #F1F5F9;
+  --cor-texto-secundario: #AAB8D0;
+
+  --cor-erro: #F87171;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, sans-serif;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+}

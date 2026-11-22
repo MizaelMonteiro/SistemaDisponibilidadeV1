@@ -49,11 +49,12 @@ router.post("/", authToken, (req, res) => {
 
     const usuario = req.usuario as any;
     const idUsuario = usuario.idUsuario;
+    const justificativa = req.body.justificativa;
 
     const { horarios } = req.body;
 
     disponibilidadeController
-        .salvarDisponibilidade(idUsuario, horarios)
+        .salvarDisponibilidade(idUsuario, horarios,justificativa)
         .then((resultado) => {
             res.status(200).json(resultado);
         })
@@ -62,6 +63,14 @@ router.post("/", authToken, (req, res) => {
             res.status(500).json(error.message);
         });
 });
+/*
+router.get("/minha-justificativa",(req, res) => {
+    console.log("Rota minha-justificativa acessada");
+    console.log("Dados do usuário:", req.usuario);
+    disponibilidadeController.consultarMinhaJustificativa(req, res)
+    
 
+});
 
+*/
 export default router;

@@ -1,31 +1,64 @@
   <aside class="menu">
 
-    <div class="logo">
-      <h2>Disponibilidade</h2>
-      <span>Sistema de Horários</span>
-    </div>
+<div class="logo">
+
+  <div class="logo-icone">
+    <span>▦</span>
+  </div>
+
+  <div class="logo-texto">
+    <h2>Disponibilidade</h2>
+    <span>Sistema de Horários</span>
+  </div>
+
+</div>
 
     <nav>
+      
       @if(estaLogado && nivelAcesso() === 'COORDENADOR') {
-        <a href="#" class="menu-item ativo">
+        
+        <a
+          routerLink="/home"
+          routerLinkActive="ativo"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="menu-item">
+
           <span>⌂</span>
-            Início
+          Início
+
         </a>
 
-        <a href="/professores" class="menu-item">
+        <a
+          routerLink="/professores"
+          routerLinkActive="ativo"
+          class="menu-item">
+
           <span>◷</span>
-            Professores
+          Professores
+
         </a>
       }@else {
-        <a href="#" class="menu-item ativo">
-        <span>⌂</span>
-        Início
-      </a>
+        
+        <a
+          routerLink="/home"
+          routerLinkActive="ativo"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="menu-item">
 
-      <a href="/minha-disponibilidade" class="menu-item">
-        <span>◷</span>
-        Minha disponibilidade
-      </a>
+          <span>⌂</span>
+          Início
+
+        </a>
+
+        <a
+          routerLink="/minha-disponibilidade"
+          routerLinkActive="ativo"
+          class="menu-item">
+
+          <span>◷</span>
+          Minha disponibilidade
+
+        </a>
       }
       
 
@@ -52,10 +85,7 @@
         Entrar
       </a>
 
-      <a href="/criar" class="menu-item">
-        <span>+</span>
-        Criar conta
-      </a>
+
 
       }
 

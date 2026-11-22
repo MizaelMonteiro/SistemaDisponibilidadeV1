@@ -30,6 +30,9 @@ export class VisualizarDisponibilidadeProfessor implements OnInit {
   carregando = signal(true);
   mensagemErro = signal('');
 
+  justificativa = signal('');
+  mostrarJustificativa = signal(false);
+
   readonly diasSemana = [
     'Segunda-feira',
     'Terça-feira',
@@ -55,12 +58,16 @@ export class VisualizarDisponibilidadeProfessor implements OnInit {
     forkJoin({
       professores: this.#professorService.buscarTodosProfessores(),
       disponibilidade: this.#disponibilidadeService.buscarDisponibilidadeProfessor(idProfessor),
+      justificativa: this.#disponibilidadeService.buscarJustificativaProfessor(idProfessor),
     }).subscribe({
-      next: ({ professores, disponibilidade }) => {
+      next: ({ professores, disponibilidade, justificativa }) => {
+        
         const professorEncontrado = professores.find(
           (professor) => professor.IdProfessor === idProfessor,
         );
-
+        console.log('Resposta da disponibilidade:', disponibilidade);
+        console.log('Resposta da justificativa:', justificativa);
+        console.log('É um array?', Array.isArray(disponibilidade));
         if (!professorEncontrado) {
           this.mensagemErro.set('Professor não encontrado.');
           this.carregando.set(false);
@@ -68,6 +75,7 @@ export class VisualizarDisponibilidadeProfessor implements OnInit {
         }
 
         this.professor.set(professorEncontrado);
+        this.justificativa.set(justificativa?.Justificativa || '');
 
         this.horariosDisponiveis.set(
           new Set(disponibilidade.map((item) => Number(item.IdHorario))),
@@ -184,5 +192,12 @@ export class VisualizarDisponibilidadeProfessor implements OnInit {
       .replace(/[^a-zA-Z0-9_-]/g, '_');
 
     documento.save(`disponibilidade_${nomeArquivo}.pdf`);
+  }
+  abrirJustificativa(): void {
+  this.mostrarJustificativa.set(true);
+}
+
+  fecharJustificativa(): void {
+    this.mostrarJustificativa.set(false);
   }
 }

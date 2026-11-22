@@ -107,7 +107,7 @@ export class ProfessorModel {
           return;
         }
 
-        console.log("Buscar professor deu certo");
+        //console.log("Buscar professor deu certo");
         resolve(resposta);
       });
     });

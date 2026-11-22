@@ -30,6 +30,9 @@ export class TelaLogin {
                     console.log("Usuário logado!", resposta);
                 
                     localStorage.setItem("token", resposta.token);
+
+                    this.#usuariosService.notificarLogin();
+                    
                     this.#router.navigate(['/home']);
                 },
                 error: erro => {

@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios-service';
 import { ProfessorService } from '../../services/professor-service';
 import type {UsuarioAutenticado} from '../exibir-usuarios/usuario';
+import { NgClass } from '../../../../node_modules/@angular/common/types/_common_module-chunk';
 
 @Component({
   imports: [],

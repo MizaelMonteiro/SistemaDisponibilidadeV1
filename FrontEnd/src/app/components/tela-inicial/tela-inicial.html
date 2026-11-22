@@ -1,88 +1,19 @@
 <div class="pagina">
-<!-- 
-   Menu lateral 
-  <aside class="menu">
 
-    <div class="logo">
-      <h2>Disponibilidade</h2>
-      <span>Sistema de Horários</span>
-    </div>
-
-    <nav>
-      @if(estaLogado && nivelAcesso() === 'COORDENADOR') {
-        <a href="#" class="menu-item ativo">
-          <span>⌂</span>
-            Início
-        </a>
-
-        <a href="/professores" class="menu-item">
-          <span>◷</span>
-            Professores
-        </a>
-      }@else {
-        <a href="#" class="menu-item ativo">
-        <span>⌂</span>
-        Início
-      </a>
-
-      <a href="/minha-disponibilidade" class="menu-item">
-        <span>◷</span>
-        Minha disponibilidade
-      </a>
-      }
-      
-
-    </nav>
-
-    <div class="menu-final">
-
-      @if (estaLogado) {
-
-      <a href="/perfil" class="menu-item">
-        <span>◉</span>
-        Meu perfil
-      </a>
-
-      <button class="sair" (click)="logout()">
-        <span>⇥</span>
-        Sair
-      </button>
-
-      } @else {
-
-      <a href="/login" class="menu-item">
-        <span>⇥</span>
-        Entrar
-      </a>
-
-      <a href="/criar" class="menu-item">
-        <span>+</span>
-        Criar conta
-      </a>
-
-      }
-
-    </div>
-
-  </aside>
-
-  -->
-
-  <!-- Conteúdo principal -->
   <main class="conteudo">
 
-    <!-- Cabeçalho -->
+    <!-- CABEÇALHO -->
     <header class="cabecalho">
 
-      <div>
+      <div class="titulo-pagina">
         <h1>Início</h1>
 
         <p>
-          Consulte e informe sua disponibilidade de horários.
+          Consulte e gerencie sua disponibilidade de horários.
         </p>
       </div>
-      @if(estaLogado){
 
+      @if(estaLogado) {
 
       <div class="usuario">
 
@@ -90,58 +21,92 @@
           {{ nivelAcesso().charAt(0).toUpperCase() }}
         </div>
 
-        <div>
+        <div class="usuario-info">
           <strong>{{ nomeUsuario() }}</strong>
-          <small>{{nivelAcesso().toLowerCase()}}</small>
+          <small>{{ nivelAcesso().toLowerCase() }}</small>
         </div>
 
       </div>
-      }@else {
+
+      } @else {
+
       <div class="usuario">
 
         <div class="avatar">
           A
         </div>
 
-        <div>
+        <div class="usuario-info">
           <strong>Anônimo</strong>
           <small>Login não efetuado</small>
         </div>
 
       </div>
+
       }
+
     </header>
 
 
-    <!-- Status da disponibilidade -->
+    <!-- CARTÃO PRINCIPAL -->
     <section class="status">
 
-      <div class="card status-card">
+      <div class="status-card">
 
         <div class="status-icone">
-          ◷
+          <span>▦</span>
         </div>
+
+        <div class="status-divisor"></div>
 
         <div class="status-conteudo">
 
-
-
-
           @if(estaLogado && nivelAcesso() === 'PROFESSOR') {
 
-          <button onclick="window.location.href='/cadastrarDispo'">
-            Editar minha disponibilidade
-          </button>
-          }@else {
+          <h2>Editar minha disponibilidade</h2>
 
-          <button onclick="window.location.href='/login'">
-            Apenas professores podem editar sua disponibilidade. Faça login para acessar.
-          </button>
-          }
           <p>
-            Informe os dias e horários em que você
-            estará disponível para ministrar aulas.
+            Informe os dias e horários em que você estará
+            disponível para ministrar aulas.
           </p>
+
+          <button class="botao-acao" onclick="window.location.href='/cadastrarDispo'">
+
+            <span>→</span>
+
+          </button>
+
+          } @else if(estaLogado && nivelAcesso() === 'COORDENADOR') {
+
+          <h2>Gerenciar usuários</h2>
+
+          <p>
+            Acesse o gerenciamento para cadastrar novos usuários
+            no sistema.
+          </p>
+
+          <button class="botao-acao" onclick="window.location.href='/criar'">
+
+            <span>→</span>
+
+          </button>
+
+          } @else {
+
+          <h2>Acesse sua conta</h2>
+
+          <p>
+            Entre no sistema para informar e gerenciar sua
+            disponibilidade de horários.
+          </p>
+
+          <button class="botao-acao" onclick="window.location.href='/login'">
+
+            <span>→</span>
+
+          </button>
+
+          }
 
         </div>
 
@@ -150,85 +115,236 @@
     </section>
 
 
-    <!-- Informações -->
+    <!-- COMO FUNCIONA -->
+    <!-- COMO FUNCIONA -->
     <section class="secao">
 
-      <div class="titulo-secao">
+      @if (estaLogado && nivelAcesso() === 'PROFESSOR') {
 
-        <h2>
-          Como funciona?
-        </h2>
+      <div class="titulo-secao">
+        <h2>Como gerenciar sua disponibilidade?</h2>
 
         <p>
-          Sua disponibilidade será utilizada posteriormente
-          para auxiliar na organização dos horários das turmas.
+          Mantenha seus horários atualizados para auxiliar a coordenação
+          na organização das aulas e das turmas.
         </p>
-
       </div>
-
 
       <div class="informacoes">
 
-        <div class="card informacao">
+        <!-- ETAPA 1 -->
+        <div class="informacao">
 
-          <div class="informacao-icone">
-            1
-          </div>
+          <div class="informacao-numero">1</div>
 
-          <div>
-            <h3>
-              Informe seus horários
-            </h3>
+          <div class="informacao-icone">▦</div>
+
+          <div class="informacao-conteudo">
+
+            <h3>Cadastre seus horários</h3>
 
             <p>
-              Selecione os dias da semana e os períodos
-              em que você possui disponibilidade.
+              Acesse o cadastro de disponibilidade e selecione
+              os períodos da semana em que poderá ministrar aulas.
             </p>
+
           </div>
 
         </div>
 
+        <!-- ETAPA 2 -->
+        <div class="informacao">
 
-        <div class="card informacao">
+          <div class="informacao-numero">2</div>
 
-          <div class="informacao-icone">
-            2
-          </div>
+          <div class="informacao-icone">✎</div>
 
-          <div>
-            <h3>
-              Mantenha seus horários atualizados
-            </h3>
+          <div class="informacao-conteudo">
+
+            <h3>Justifique os períodos indisponíveis</h3>
 
             <p>
-              Você poderá consultar, alterar ou remover
-              os períodos cadastrados.
+              Caso não esteja disponível em todos os horários,
+              informe uma justificativa para os períodos não selecionados.
             </p>
+
           </div>
 
         </div>
 
+        <!-- ETAPA 3 -->
+        <div class="informacao">
 
-        <div class="card informacao">
+          <div class="informacao-numero">3</div>
 
-          <div class="informacao-icone">
-            3
-          </div>
+          <div class="informacao-icone">⟳</div>
 
-          <div>
-            <h3>
-              Organização dos horários
-            </h3>
+          <div class="informacao-conteudo">
+
+            <h3>Mantenha seus dados atualizados</h3>
 
             <p>
-              As informações poderão ser utilizadas
-              posteriormente na montagem dos horários.
+              Sempre que sua disponibilidade mudar, acesse novamente
+              o cadastro para atualizar os horários informados.
             </p>
+
           </div>
 
         </div>
 
       </div>
+
+      } @else if (estaLogado && nivelAcesso() === 'COORDENADOR') {
+
+      <div class="titulo-secao">
+        <h2>Como utilizar o sistema?</h2>
+
+        <p>
+          Consulte as informações dos professores para auxiliar
+          no planejamento e na organização dos horários das turmas.
+        </p>
+      </div>
+
+      <div class="informacoes">
+
+        <!-- ETAPA 1 -->
+        <div class="informacao">
+
+          <div class="informacao-numero">1</div>
+
+          <div class="informacao-icone">♙</div>
+
+          <div class="informacao-conteudo">
+
+            <h3>Consulte os professores</h3>
+
+            <p>
+              Acesse a listagem de professores cadastrados
+              para localizar o profissional cuja disponibilidade deseja consultar.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- ETAPA 2 -->
+        <div class="informacao">
+
+          <div class="informacao-numero">2</div>
+
+          <div class="informacao-icone">▦</div>
+
+          <div class="informacao-conteudo">
+
+            <h3>Visualize as disponibilidades</h3>
+
+            <p>
+              Consulte a grade semanal de cada professor e identifique
+              os dias e períodos em que ele poderá ministrar aulas.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- ETAPA 3 -->
+        <div class="informacao">
+
+          <div class="informacao-numero">3</div>
+
+          <div class="informacao-icone">⇩</div>
+
+          <div class="informacao-conteudo">
+
+            <h3>Exporte as informações</h3>
+
+            <p>
+              Utilize a opção de exportação em PDF para obter
+              uma cópia da disponibilidade do professor consultado.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      } @else {
+
+      <div class="titulo-secao">
+        <h2>Como funciona?</h2>
+
+        <p>
+          O sistema permite que os professores informem seus horários
+          disponíveis, facilitando o trabalho de organização da coordenação.
+        </p>
+      </div>
+
+      <div class="informacoes">
+
+        <!-- ETAPA 1 -->
+        <div class="informacao">
+
+          <div class="informacao-numero">1</div>
+
+          <div class="informacao-icone">♙</div>
+
+          <div class="informacao-conteudo">
+
+            <h3>Acesse sua conta</h3>
+
+            <p>
+              Entre no sistema com suas credenciais para acessar
+              as funcionalidades correspondentes ao seu perfil.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- ETAPA 2 -->
+        <div class="informacao">
+
+          <div class="informacao-numero">2</div>
+
+          <div class="informacao-icone">▦</div>
+
+          <div class="informacao-conteudo">
+
+            <h3>Informe sua disponibilidade</h3>
+
+            <p>
+              Os professores selecionam os dias e períodos
+              em que poderão ministrar aulas.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- ETAPA 3 -->
+        <div class="informacao">
+
+          <div class="informacao-numero">3</div>
+
+          <div class="informacao-icone">⟳</div>
+
+          <div class="informacao-conteudo">
+
+            <h3>Auxilie na organização</h3>
+
+            <p>
+              As disponibilidades cadastradas poderão ser consultadas
+              pela coordenação para auxiliar na organização dos horários.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      }
 
     </section>
 

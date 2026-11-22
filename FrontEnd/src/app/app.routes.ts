@@ -16,7 +16,7 @@ import { VisualizarDisponibilidadeProfessor } from './components/visualizar-disp
 export const routes: Routes = [
     {path: 'listar', component: ExibirUsuarios ,canActivate: [authGuard]},
     {path: '', redirectTo: '/home', pathMatch: 'full'},
-    {path: 'criar', component: CriarUsuario },
+    {path: 'criar', component: CriarUsuario , canActivate: [authGuard, coordenadorGuard]},
     {path: 'login', component: TelaLogin },
     {path: 'home', component: TelaInicial },
     {path: 'cadastrarDispo', component: CadastrarDispo, canActivate: [authGuard] },

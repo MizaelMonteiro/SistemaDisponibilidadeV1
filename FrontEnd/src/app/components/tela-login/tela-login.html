@@ -1,36 +1,54 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Login</title>
+<div class="login-container">
 
-</head>
-<body>
-    <div class="login-container">
-        <h2>Entrar</h2>
-        <form (ngSubmit)="logarUsuario()">
-            <div class="input-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="Email" [(ngModel)]="email" name="email" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" placeholder="Senha" [(ngModel)]="senha" name="senha" required>
-            </div>
+  <div class="login-icone">
+    <span>▦</span>
+  </div>
 
-            <div class="form-actions">
-                <a href="/criar">Crie uma conta</a>
-            </div>
-            
-            <div class="form-actions">
-                <a href="">Esqueceu a senha?</a>
-            </div>
-            
+  <header class="login-cabecalho">
+    <h2>Bem-vindo</h2>
+    <p>Entre com suas credenciais para acessar o sistema.</p>
+  </header>
 
-            <button type="submit" class="btn-login">Acessar</button>
-        </form>
+  <form (ngSubmit)="logarUsuario()">
+
+    <div class="input-group">
+      <label for="email">E-mail</label>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Digite seu e-mail"
+        [(ngModel)]="email"
+        name="email"
+        required>
     </div>
-</body>
-</html>
+
+    <div class="input-group">
+      <label for="password">Senha</label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Digite sua senha"
+        [(ngModel)]="senha"
+        name="senha"
+        required>
+    </div>
+
+    <div class="form-links">
+      <a href="/criar">Crie uma conta</a>
+      <a href="">Esqueceu a senha?</a>
+    </div>
+
+    <button type="submit" class="btn-login">
+      Acessar
+      <span>→</span>
+    </button>
+
+  </form>
+
+  <div class="login-rodape">
+    <span>Sistema de Disponibilidade de Horários</span>
+  </div>
+
+</div>

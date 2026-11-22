@@ -36,9 +36,16 @@ export class MinhaDisponibilidade implements OnInit {
   protected linhas = signal<LinhaHorario[]>([]);
   protected horariosSelecionados = signal<number[]>([]);
 
-  ngOnInit(): void {
+  protected mostrarJustificativa = signal(false);
+  protected justificativa = signal('');
 
+
+  
+
+  ngOnInit(): void {
+    this.buscarJustificativa();
     this.buscarProfessor();
+    
 
     this.#horariosService.obterTodos().subscribe({
       next: (horarios) => {
@@ -189,6 +196,27 @@ export class MinhaDisponibilidade implements OnInit {
     .replace(/[^a-zA-Z0-9À-ÿ_-]+/g, '_');
 
   documento.save(`minha_disponibilidade_${nomeArquivo || 'professor'}.pdf`);
+}
+
+
+private buscarJustificativa(): void {
+  this.#disponibilidadeService.buscarMinhaJustificativa().subscribe({
+    next: (resposta) => {
+      this.justificativa.set(resposta?.Justificativa || '');
+    },
+    error: (erro) => {
+      console.error('Erro ao buscar justificativa:', erro);
+      console.error('Mensagem do backend:', erro.error);
+    }
+  });
+}
+
+protected abrirJustificativa(): void {
+  this.mostrarJustificativa.set(true);
+}
+
+protected fecharJustificativa(): void {
+  this.mostrarJustificativa.set(false);
 }
 
 }

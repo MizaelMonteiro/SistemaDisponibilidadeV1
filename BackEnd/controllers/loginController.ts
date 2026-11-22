@@ -25,7 +25,7 @@ export class LoginController {
       console.log("Usuário ou senha incorretos");
       throw new Error("Usuário ou senha incorretos");
     }
-
+    
     const token = jwt.sign(
       {
         idUsuario: usuario.idUsuario,
